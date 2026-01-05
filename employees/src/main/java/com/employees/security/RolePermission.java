@@ -6,33 +6,40 @@ import java.util.Map;
 import java.util.Set;
 
 public class RolePermission {
-	Map<String , Set<Operations>> map=new HashMap<>(); 
+	Map<Roles , Set<Operations>> map=new HashMap<>(); 
 	
 	public RolePermission() {
-		map.put("ADMIN",EnumSet.of(
+		map.put(Roles.ADMIN,EnumSet.of(
 				Operations.ADD,
 				Operations.UPDATE,
 				Operations.FETCH,
 				Operations.FETCHBYID,
 				Operations.DELETE,
+				Operations.RESETPASSWORD,
 				Operations.EXIT
 				));
 		
-		map.put("MANAGER", EnumSet.of(
+		map.put(Roles.MANAGER, EnumSet.of(
 				Operations.FETCH,
 				Operations.FETCHBYID,
 				Operations.UPDATE,
 				Operations.EXIT
 				));
 		
-		map.put("EMPLOYEE", EnumSet.of(
+		map.put(Roles.EMPLOYEE, EnumSet.of(
 				Operations.FETCHBYID,
 				Operations.UPDATE,
+				Operations.CHANGEPASSWORD,
 				Operations.EXIT
 				));
 	}
 	
-	public boolean hasAccess(String role,Operations operation) {
-		return map.get(role).contains(operation);
+	public boolean hasAccess(Set<Roles> roles,Operations operation) {
+		for(Roles role:roles) {
+			if(map.getOrDefault(role,Set.of()).contains(operation)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

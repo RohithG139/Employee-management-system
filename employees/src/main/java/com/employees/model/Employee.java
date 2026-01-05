@@ -1,15 +1,21 @@
 package com.employees.model;
 
+import java.util.Set;
+
+import com.employees.security.Roles;
+
 public class Employee {
 	private String id;
 	private String name;
 	private String dept;
 	private String email;
 	private String phnNo;
-	private String role;
+	private Set<Roles> role;
 	private String password;
-
-	public Employee(String id, String name, String dept, String email, String phnNo, String role, String password) {
+	public Employee() {
+		
+	}
+	public Employee(String id, String name, String dept, String email, String phnNo, Set<Roles> role, String password) {
 		this.id = id;
 		this.name = name;
 		this.dept = dept;
@@ -39,14 +45,16 @@ public class Employee {
 		return phnNo;
 	}
 	
-	public String getRole() {
+	public Set<Roles> getRole() {
 		return role;
 	}
 	
 	public String getPassword() {
 		return password;
 	}
-	
+	public void setId(String id) {
+		this.id=id;
+	}
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -64,7 +72,7 @@ public class Employee {
 		this.phnNo = phnNo;
 	}
 	
-	public void setRole(String role) {
+	public void setRole(Set<Roles> role) {
 		this.role = role;
 	}
 	
@@ -72,7 +80,4 @@ public class Employee {
 		this.password=password;
 	}
 	
-	public String toString() {
-		return "Employee{id=" + id + ", name='" + name + "', dept='" + dept + "'}";
-	}
 }

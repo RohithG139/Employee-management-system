@@ -6,5 +6,7 @@ public enum Operations {
 	FETCH,
 	DELETE,
 	FETCHBYID,
+	RESETPASSWORD,
+	CHANGEPASSWORD,
 	EXIT
 }

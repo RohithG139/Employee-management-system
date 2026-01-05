@@ -8,6 +8,7 @@ import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.services.AddEmployee;
 import com.employees.services.DeleteEmployee;
 import com.employees.services.FetchEmployee;
+import com.employees.services.PasswordOperations;
 import com.employees.services.UpdateEmployee;
 
 public class EmployeeController {
@@ -33,5 +34,13 @@ public class EmployeeController {
 	public void fetchByIdController() throws ParseException,IOException{
 		FetchEmployee fetchObj=new FetchEmployee();
 		fetchObj.fetchById();
+	}
+	public void resetPassword() throws ParseException, IOException{
+		PasswordOperations passObj=new PasswordOperations();
+		passObj.resetPassword();
+	}
+	public void changePassword() throws ParseException, IOException{
+		PasswordOperations passObj=new PasswordOperations();
+		passObj.changePassword();
 	}
 }

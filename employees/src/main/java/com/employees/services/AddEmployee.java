@@ -1,7 +1,9 @@
 package com.employees.services;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import org.json.simple.parser.ParseException;
 
@@ -10,6 +12,8 @@ import com.employees.dao.EmployeeDaoImpl;
 import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
+import com.employees.security.Roles;
+import com.employees.utils.GenerateId;
 import com.employees.utils.Util;
 
 public class AddEmployee {
@@ -46,14 +50,34 @@ public class AddEmployee {
 				System.out.println(e.getMessage());
 			}
 		}
-		System.out.println("Enter role:");
-		String role = sc.next().toUpperCase();
+		System.out.println("Enter roles and exit to finish");
+		Set<Roles> roles=new HashSet<>();
+		while(true) {
+			System.out.println("Available Roles:");
+			for(Roles role:Roles.values()) {
+				System.out.println(role);
+			}
+			System.out.println("Enter role:");
+			String input=sc.next().toUpperCase();
+			if(input.equals("EXIT")) {
+				break;
+			}
+			Roles role=Roles.valueOf(input);
+			if(roles.add(role)) {
+				System.out.println("Role added successfully");
+			}
+			else {
+				System.out.println("Role already added");
+			}
+			
+		}
 
-		System.out.println("Enter password:");
-		String password = sc.next();
-
-		dao.addEmployee(new Employee(id, name, dept, email, phnNo, role, password));
+		String password=	"Temp@"+System.currentTimeMillis();
+		String hashedPassword=Util.hashPassword(password);
+		
+		dao.addEmployee(new Employee(id, name, dept, email, phnNo, roles, hashedPassword));
 		System.out.println("Employee added succesfully");
+		System.out.println("Your password:"+password);
 
 	}
 }

@@ -1,5 +1,6 @@
 package com.employees.utils;
 
+import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,4 +26,20 @@ public class Util {
 			}
 		
 	}
+	public static String hashPassword(String password) {
+		try {
+			MessageDigest md=MessageDigest.getInstance("SHA-256");
+			byte[] bytes = md.digest(password.getBytes());
+
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes)
+                sb.append(String.format("%02x", b));
+
+            return sb.toString();
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+	
 }

@@ -1,6 +1,7 @@
 package com.employees.dao;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.json.simple.parser.ParseException;
 
@@ -12,5 +13,7 @@ public interface EmployeeDao {
 	void fetchEmployeeById(String id) throws ParseException,IOException;
 	void deleteEmployee(String id) throws ParseException,IOException;
 	void updateEmployee(String id,String name) throws ParseException,IOException;
-
+	void resetPassword(String id) throws ParseException, IOException;
+	void changePassword(String id,String password) throws ParseException, IOException;
+	
 }

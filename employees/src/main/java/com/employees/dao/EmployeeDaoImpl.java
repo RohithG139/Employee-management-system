@@ -13,10 +13,13 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.employees.model.Employee;
+import com.employees.security.Roles;
+import com.employees.utils.PasswordGenerator;
+import com.employees.utils.Util;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 	File file = new File("src/main/resources/Employees.json");
-
+	PasswordGenerator passObj=new PasswordGenerator();
 	public JSONArray readJson() throws IOException, ParseException {
 		JSONParser parser = new JSONParser();
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -55,7 +58,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		jsonObject.put("dept", e.getDept());
 		jsonObject.put("email", e.getEmail());
 		jsonObject.put("phnNo", e.getPhnNo());
-		jsonObject.put("role", e.getRole());
+		JSONArray jsonArray=new JSONArray();
+		for(Roles r:e.getRole()) {
+			jsonArray.add(r.toString());
+		}
+		jsonObject.put("role", jsonArray);
 		jsonObject.put("password", e.getPassword());
 
 		employees.add(jsonObject);
@@ -112,6 +119,38 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
 				employee.put("name", name);
+				writeJson(employees);
+				return;
+			}
+		}
+	}
+	
+	public void resetPassword(String id) throws ParseException, IOException{
+		
+		JSONArray employees = readJson();
+		if (!checkEmp(employees, id)) {
+			System.out.println("Employee not exist:");
+			return;
+		}
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				String password="Temp@"+System.currentTimeMillis();
+				System.out.println("Your reset password:"+password);
+				 String hashedPassword=Util.hashPassword(password);
+				 employee.put("password",hashedPassword);
+				 writeJson(employees);
+				 return;
+				}
+			}
+		
+	}
+	public void changePassword(String id,String password) throws ParseException, IOException {
+		JSONArray employees = readJson();
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				employee.put("password", Util.hashPassword(password));
 				writeJson(employees);
 				return;
 			}
