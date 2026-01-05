@@ -12,6 +12,7 @@ import com.employees.controller.LoginController;
 import com.employees.security.Operations;
 import com.employees.security.RolePermission;
 import com.employees.security.Roles;
+import com.employees.security.ValidateLogin;
 
 public class Menu {
 
@@ -24,14 +25,15 @@ public class Menu {
 		boolean loggedIn = false;
 		Set<Roles> roles=new HashSet<>();
 		while (!loggedIn) {
-			System.out.println("Enter ID for Login");
-			String id = sc.next().toUpperCase();
-
+			System.out.println("Enter userName for Login");
+			String userName = sc.next();
+			
 			System.out.println("Enter Password for Login");
 			String password = sc.next();
-			roles=loginController.performLogin(id, password);
-			if (!roles.isEmpty()) {
+			//roles=loginController.performLogin(userName, password);
+			if (loginController.performLogin(userName, password)) {
 				loggedIn = true;
+				roles=ValidateLogin.roles;
 			} else {
 				System.out.println("Invalid Login,Try again.");
 			}

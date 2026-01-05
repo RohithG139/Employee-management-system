@@ -18,7 +18,7 @@ import com.employees.utils.Util;
 public class ValidateLogin {
 	public static Set<Roles> roles;
 	public static String id;
-	public boolean validate(String id,String password) {
+	public boolean validate(String userName,String password) {
 		File file = new File("src/main/resources/Employees.json");
 		JSONParser parser=new JSONParser();
 		Employee emp=new Employee();
@@ -28,7 +28,7 @@ public class ValidateLogin {
             for (Object o : employeesList) {
                 JSONObject employee = (JSONObject) o;
                 
-                if (employee.get("id").equals(id) && employee.get("password").equals(Util.hashPassword(password))) {
+                if (employee.get("name").toString().equalsIgnoreCase(userName) && employee.get("password").equals(Util.hashPassword(password))) {
                 	
                 	   JSONArray rolesArray = (JSONArray) employee.get("role");
                 	   
@@ -38,7 +38,7 @@ public class ValidateLogin {
                 	   }
 
                 	   ValidateLogin.roles = roleList;
-                	   ValidateLogin.id = id;
+                	   ValidateLogin.id = employee.get("id").toString();
 
                    return true;
                 }

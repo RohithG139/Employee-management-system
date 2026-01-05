@@ -8,6 +8,8 @@ import org.json.simple.parser.ParseException;
 import com.employees.dao.EmployeeDao;
 import com.employees.dao.EmployeeDaoImpl;
 import com.employees.security.ValidateLogin;
+import com.employees.utils.PasswordGenerator;
+import com.employees.utils.Util;
 import com.employees.utils.ValidatorID;
 
 public class PasswordOperations {
@@ -22,14 +24,17 @@ public class PasswordOperations {
 			System.out.println("please Enter valid id");
 			return;
 		}
-		dao.resetPassword(id);
+		String password="Tek@"+PasswordGenerator.generate();
+		System.out.println("Your reset password:"+password);
+		String hashedPassword=Util.hashPassword(password);
+		dao.resetPassword(id,hashedPassword);
 		System.out.println("Password reset successfully");
 	}
 	public void changePassword() throws ParseException, IOException{
 		String id=loginObj.id;
 		System.out.println("Enter new password:");
 		String newPass=sc.next();
-		dao.changePassword(id,newPass);
+		dao.changePassword(id,Util.hashPassword(newPass));
 		System.out.println("password is changed Successfully.");
 	}
 }

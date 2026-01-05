@@ -4,12 +4,12 @@ import java.util.Set;
 import com.employees.security.Roles;
 import com.employees.security.ValidateLogin;
 public class LoginController {
-	public Set<Roles> performLogin(String id,String password) {
+	public boolean performLogin(String userName,String password) {
 		ValidateLogin loginObj=new ValidateLogin();
-		boolean validateUser=loginObj.validate(id,password);
+		boolean validateUser=loginObj.validate(userName,password);
 		if(validateUser) {
-			return loginObj.roles;
+			return true;
 		}
-		return null;
+		return false;
 	}
 }

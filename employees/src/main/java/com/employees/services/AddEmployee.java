@@ -14,6 +14,7 @@ import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
 import com.employees.security.Roles;
 import com.employees.utils.GenerateId;
+import com.employees.utils.PasswordGenerator;
 import com.employees.utils.Util;
 
 public class AddEmployee {
@@ -72,7 +73,7 @@ public class AddEmployee {
 			
 		}
 
-		String password=	"Temp@"+System.currentTimeMillis();
+		String password="Tek@"+PasswordGenerator.generate();
 		String hashedPassword=Util.hashPassword(password);
 		
 		dao.addEmployee(new Employee(id, name, dept, email, phnNo, roles, hashedPassword));

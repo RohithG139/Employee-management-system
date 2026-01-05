@@ -125,7 +125,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 	}
 	
-	public void resetPassword(String id) throws ParseException, IOException{
+	public void resetPassword(String id,String password) throws ParseException, IOException{
 		
 		JSONArray employees = readJson();
 		if (!checkEmp(employees, id)) {
@@ -135,10 +135,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
-				String password="Temp@"+System.currentTimeMillis();
-				System.out.println("Your reset password:"+password);
-				 String hashedPassword=Util.hashPassword(password);
-				 employee.put("password",hashedPassword);
+				 employee.put("password",password);
 				 writeJson(employees);
 				 return;
 				}
@@ -150,7 +147,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
-				employee.put("password", Util.hashPassword(password));
+				employee.put("password", password);
 				writeJson(employees);
 				return;
 			}

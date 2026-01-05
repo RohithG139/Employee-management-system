@@ -13,7 +13,7 @@ public interface EmployeeDao {
 	void fetchEmployeeById(String id) throws ParseException,IOException;
 	void deleteEmployee(String id) throws ParseException,IOException;
 	void updateEmployee(String id,String name) throws ParseException,IOException;
-	void resetPassword(String id) throws ParseException, IOException;
+	void resetPassword(String id,String password) throws ParseException, IOException;
 	void changePassword(String id,String password) throws ParseException, IOException;
 	
 }
