@@ -153,5 +153,18 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 		}
 	}
+	public void updateUserLogin(String id,String phnNo,String email) throws ParseException,IOException{
+		JSONArray employees = readJson();
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				employee.put("phnNo", phnNo);
+				employee.put("email", email);
+				writeJson(employees);
+				return;
+			}
 
+	}
+
+	}
 }

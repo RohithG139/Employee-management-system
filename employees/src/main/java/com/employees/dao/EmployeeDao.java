@@ -15,5 +15,5 @@ public interface EmployeeDao {
 	void updateEmployee(String id,String name) throws ParseException,IOException;
 	void resetPassword(String id,String password) throws ParseException, IOException;
 	void changePassword(String id,String password) throws ParseException, IOException;
-	
+	void updateUserLogin(String id,String phnNo,String email) throws ParseException,IOException;
 }

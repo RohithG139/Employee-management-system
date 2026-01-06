@@ -38,6 +38,7 @@ public class ValidateLogin {
                 	   }
 
                 	   ValidateLogin.roles = roleList;
+                	   //roles.addAll(roleList);
                 	   ValidateLogin.id = employee.get("id").toString();
 
                    return true;

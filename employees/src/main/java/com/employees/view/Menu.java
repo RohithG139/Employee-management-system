@@ -38,14 +38,15 @@ public class Menu {
 				System.out.println("Invalid Login,Try again.");
 			}
 		}
-		for(Operations operation:Operations.values()) {
-			if(rolePermission.hasAccess(roles,operation)) {
-				System.out.println(operation);
-			}
-		}
+		
 		
 		
 		while(true) {
+			for(Operations operation:Operations.values()) {
+				if(rolePermission.hasAccess(roles,operation)) {
+					System.out.println(operation);
+				}
+			}
 			System.out.println("Enter choice:");
 			String input=sc.next().toUpperCase();
 			Operations choice = null;
@@ -61,8 +62,11 @@ public class Menu {
 				if(choice==Operations.ADD) {
 					employeeController.addController();
 				}
-				else if(choice==Operations.UPDATE) {
+				else if(choice==Operations.UPDATE && (roles.contains("ADMIN") || roles.contains("MANAGER"))) {
 					employeeController.updateController();
+				}
+				else if(choice==Operations.UPDATE && !roles.contains("ADMIN")) {
+					employeeController.updateUserController();
 				}
 				else if(choice==Operations.DELETE) {
 					employeeController.deleteController();
@@ -86,7 +90,7 @@ public class Menu {
 					System.out.println("Please enter valid Operation");
 				}
 			}else {
-				System.out.println("Please enter valid Operation");
+				System.out.println("You dont have a permission:");
 			}
 			
 		}

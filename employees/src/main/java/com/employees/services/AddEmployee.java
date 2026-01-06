@@ -21,7 +21,7 @@ public class AddEmployee {
 	public void insert() throws IOException, ParseException {
 		Scanner sc = new Scanner(System.in);
 		EmployeeDao dao = new EmployeeDaoImpl();
-		GenerateId genObj=new GenerateId();
+		GenerateId genObj = new GenerateId();
 		String id = genObj.getId();
 
 		System.out.println("Enter name:");
@@ -52,33 +52,38 @@ public class AddEmployee {
 			}
 		}
 		System.out.println("Enter roles and exit to finish");
-		Set<Roles> roles=new HashSet<>();
-		while(true) {
+		Set<Roles> roles = new HashSet<>();
+		while (true) {
 			System.out.println("Available Roles:");
-			for(Roles role:Roles.values()) {
+			for (Roles role : Roles.values()) {
 				System.out.println(role);
 			}
+			try {
 			System.out.println("Enter role:");
-			String input=sc.next().toUpperCase();
-			if(input.equals("EXIT")) {
+			String input = sc.next().toUpperCase();
+			
+			if (input.equals("EXIT")) {
 				break;
 			}
-			Roles role=Roles.valueOf(input);
-			if(roles.add(role)) {
+			Roles role = Roles.valueOf(input);
+			
+			if (roles.add(role)) {
 				System.out.println("Role added successfully");
-			}
-			else {
+			} else {
 				System.out.println("Role already added");
 			}
-			
+			}catch(IllegalArgumentException e) {
+				System.out.println("Provide valid role");
+				continue;
+			}
 		}
 
-		String password="Tek@"+PasswordGenerator.generate();
-		String hashedPassword=Util.hashPassword(password);
-		
+		String password = "Tek@" + PasswordGenerator.generate();
+		String hashedPassword = Util.hashPassword(password);
+
 		dao.addEmployee(new Employee(id, name, dept, email, phnNo, roles, hashedPassword));
 		System.out.println("Employee added succesfully");
-		System.out.println("Your password:"+password);
+		System.out.println("Your password:" + password);
 
 	}
 }
