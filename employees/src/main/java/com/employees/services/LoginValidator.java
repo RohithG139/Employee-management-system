@@ -1,14 +1,17 @@
 package com.employees.services;
 
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Set;
+
+import org.json.simple.parser.ParseException;
 
 import com.employees.dao.EmployeeDaoImpl;
 
 public class LoginValidator {
 	Scanner sc = new Scanner(System.in);
 	EmployeeDaoImpl dao=new EmployeeDaoImpl();
-	public boolean validate() {
+	public boolean validate() throws ParseException, IOException{
 		boolean validUser = false;
 		while (!validUser) {
 			System.out.println("Enter username:");

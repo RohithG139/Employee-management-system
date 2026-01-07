@@ -18,26 +18,29 @@ import com.employees.security.Roles;
 import com.employees.utils.PasswordGenerator;
 import com.employees.utils.Util;
 
+
 public class EmployeeDaoImpl implements EmployeeDao {
 	PasswordGenerator passObj = new PasswordGenerator();
 	public static Set<Roles> roles;
 	public static String id;
-
-	public JSONArray readDataFromJson() throws IOException, ParseException {
+	public static final String file="Employees.json";
+	Util util =new Util();
+	public JSONArray readDataFromJson() throws ParseException, IOException{
 		JSONParser parser = new JSONParser();
-		try (BufferedReader reader = new BufferedReader(new FileReader(Util.file))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			return (JSONArray) parser.parse(reader);
 		}
 	}
 
 	public void writeDataToJson(JSONArray array) throws IOException {
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(Util.file))) {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			writer.write(array.toJSONString());
+		}catch(IOException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
-	public boolean validateUser(String name, String password) {
-		try {
+	public boolean validateUser(String name, String password) throws ParseException, IOException {
 			JSONArray employeesList = readDataFromJson();
 			for (Object employees : employeesList) {
 				JSONObject employee = (JSONObject) employees;
@@ -58,11 +61,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					return true;
 				}
 			}
-		} catch (IOException e) {
-			System.err.println("IO Error: " + e.getMessage());
-		} catch (ParseException e) {
-			System.err.println("Parsing Error: " + e.getMessage());
-		}
+		
 		return false;
 	}
 
@@ -82,24 +81,26 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				+ "  |  PhnNo : " + emp.get("phnNo"));
 	}
 
-	public void addEmployee(Employee e) throws ParseException, IOException {
+	public void addEmployee(Employee employee) throws ParseException, IOException {
+		
 		JSONArray employees = readDataFromJson();
 		JSONObject jsonObject = new JSONObject();
 
-		jsonObject.put("id", e.getId());
-		jsonObject.put("name", e.getName());
-		jsonObject.put("dept", e.getDept());
-		jsonObject.put("email", e.getEmail());
-		jsonObject.put("phnNo", e.getPhnNo());
+		jsonObject.put("id", employee.getId());
+		jsonObject.put("name", employee.getName());
+		jsonObject.put("dept", employee.getDept());
+		jsonObject.put("email", employee.getEmail());
+		jsonObject.put("phnNo", employee.getPhnNo());
 		JSONArray jsonArray = new JSONArray();
-		for (Roles r : e.getRole()) {
-			jsonArray.add(r.toString());
+		for (Roles role : employee.getRole()) {
+			jsonArray.add(role.toString());
 		}
 		jsonObject.put("role", jsonArray);
-		jsonObject.put("password", e.getPassword());
+		jsonObject.put("password", employee.getPassword());
 
 		employees.add(jsonObject);
 		writeDataToJson(employees);
+		
 	}
 
 	public void fetchEmployee() throws ParseException, IOException {
@@ -108,6 +109,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			JSONObject employee = (JSONObject) obj;
 			print(employee);
 		}
+		
 	}
 
 	public void fetchEmployeeById(String id) throws ParseException, IOException {
@@ -195,18 +197,17 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 	}
 
-	public void updateUserLogin(String id, String phnNo, String email) throws ParseException, IOException {
+	public void updateUserLogin(String id, String phnNo) throws ParseException, IOException {
 		JSONArray employees = readDataFromJson();
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
 				employee.put("phnNo", phnNo);
-				employee.put("email", email);
 				writeDataToJson(employees);
 				return;
 			}
-
 		}
+		
 
 	}
 }

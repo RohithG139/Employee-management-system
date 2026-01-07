@@ -52,9 +52,7 @@ public class UpdateEmployee {
 				System.out.println(e.getMessage());
 			}
 		}
-	  System.out.println("Enter new email");
-	  String newEmail=sc.next();
-	  dao.updateUserLogin(id,phnNo,newEmail);
+	  dao.updateUserLogin(id,phnNo);
 	  System.out.println("Updated succesfully");
   }
 }
