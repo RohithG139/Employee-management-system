@@ -6,14 +6,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class RolePermission {
-	Map<Roles , Set<Operations>> map=new HashMap<>(); 
+	static Map<Roles , Set<Operations>> map=new HashMap<>(); 
 	
 	public RolePermission() {
 		map.put(Roles.ADMIN,EnumSet.of(
 				Operations.ADD,
 				Operations.UPDATE,
 				Operations.FETCH,
-				Operations.FETCHBYID,
+				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.DELETE,
 				Operations.RESETPASSWORD,
 				Operations.EXIT
@@ -21,13 +21,13 @@ public class RolePermission {
 		
 		map.put(Roles.MANAGER, EnumSet.of(
 				Operations.FETCH,
-				Operations.FETCHBYID,
+				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.UPDATE,
 				Operations.EXIT
 				));
 		
 		map.put(Roles.EMPLOYEE, EnumSet.of(
-				Operations.FETCHBYID,
+				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.UPDATE,
 				Operations.CHANGEPASSWORD,
 				Operations.EXIT

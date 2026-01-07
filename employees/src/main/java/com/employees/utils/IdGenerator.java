@@ -8,12 +8,12 @@ import org.json.simple.parser.ParseException;
 
 import com.employees.dao.EmployeeDaoImpl;
 
-public class GenerateId {
+public class IdGenerator {
 	static String prefix = "TEK";
 
 	public String getId() throws IOException, ParseException{
 		EmployeeDaoImpl obj=new EmployeeDaoImpl();
-		JSONArray employees=obj.readJson();
+		JSONArray employees=obj.readDataFromJson();
 		int size=employees.size();
 		int newId;
 		if(size==0) {

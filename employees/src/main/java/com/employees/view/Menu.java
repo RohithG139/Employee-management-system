@@ -9,10 +9,12 @@ import org.json.simple.parser.ParseException;
 
 import com.employees.controller.EmployeeController;
 import com.employees.controller.LoginController;
+import com.employees.dao.EmployeeDaoImpl;
 import com.employees.security.Operations;
 import com.employees.security.RolePermission;
 import com.employees.security.Roles;
-import com.employees.security.ValidateLogin;
+import com.employees.services.LoginValidator;
+
 
 public class Menu {
 
@@ -22,24 +24,10 @@ public class Menu {
 		EmployeeController employeeController = new EmployeeController();
 		LoginController loginController=new LoginController();
 		RolePermission rolePermission=new RolePermission();
-		boolean loggedIn = false;
 		Set<Roles> roles=new HashSet<>();
-		while (!loggedIn) {
-			System.out.println("Enter userName for Login");
-			String userName = sc.next();
-			
-			System.out.println("Enter Password for Login");
-			String password = sc.next();
-			//roles=loginController.performLogin(userName, password);
-			if (loginController.performLogin(userName, password)) {
-				loggedIn = true;
-				roles=ValidateLogin.roles;
-			} else {
-				System.out.println("Invalid Login,Try again.");
-			}
-		}
-		
-		
+	
+		if(loginController.performLogin()) {
+			roles=EmployeeDaoImpl.roles;
 		
 		while(true) {
 			for(Operations operation:Operations.values()) {
@@ -62,37 +50,35 @@ public class Menu {
 				if(choice==Operations.ADD) {
 					employeeController.addController();
 				}
-				else if(choice==Operations.UPDATE && (roles.contains("ADMIN") || roles.contains("MANAGER"))) {
+			    if(choice==Operations.UPDATE && (roles.contains(Roles.ADMIN) || roles.contains(Roles.MANAGER))) {
 					employeeController.updateController();
 				}
-				else if(choice==Operations.UPDATE && !roles.contains("ADMIN")) {
+				if(choice==Operations.UPDATE && roles.contains(Roles.EMPLOYEE)) {
 					employeeController.updateUserController();
 				}
-				else if(choice==Operations.DELETE) {
+				if(choice==Operations.DELETE) {
 					employeeController.deleteController();
 				}
-				else if(choice==Operations.FETCH) {
+				if(choice==Operations.FETCH) {
 					employeeController.fetchController();
 				}
-				else if(choice==Operations.FETCHBYID) {
+				if(choice==Operations.FETCH_EMPLOYEE_BY_ID) {
 					employeeController.fetchByIdController();
 				}
-				else if(choice==Operations.RESETPASSWORD) {
+				 if(choice==Operations.RESETPASSWORD) {
 					employeeController.resetPassword();
 				}
-				else if(choice==Operations.CHANGEPASSWORD) {
+				 if(choice==Operations.CHANGEPASSWORD) {
 					employeeController.changePassword();
 				}
-				else if(choice==Operations.EXIT) {
+				 if(choice==Operations.EXIT) {
 					System.exit(0);
-				}
-				else {
-					System.out.println("Please enter valid Operation");
 				}
 			}else {
 				System.out.println("You dont have a permission:");
 			}
 			
+		}
 		}
 
 	}

@@ -8,30 +8,39 @@ import org.json.simple.parser.ParseException;
 import com.employees.dao.EmployeeDao;
 import com.employees.dao.EmployeeDaoImpl;
 import com.employees.exceptions.IllegalPhnNoException;
-import com.employees.security.ValidateLogin;
 import com.employees.utils.Util;
-import com.employees.utils.ValidatorID;
+import com.employees.utils.IdValidator;
 
 public class UpdateEmployee {
 	Scanner sc=new Scanner(System.in);
 	EmployeeDao dao=new EmployeeDaoImpl();
-	ValidateLogin loginObj=new ValidateLogin();
+	LoginValidator loginObj=new LoginValidator();
   public void update() throws IOException,ParseException{
 	  
 	    System.out.println("Enter Id to Update:");
 		String id=sc.next().toUpperCase();
-		if(!ValidatorID.validId(id)) {
+		if(!IdValidator.validId(id)) {
 			System.out.println("please Enter valid id");
 			return;
 		}
 		System.out.println("Enter new name to Update:");
 		String newName=sc.next();
-		dao.updateEmployee(id,newName);
+		
+		System.out.println("Enter new dept to Update:");
+		String newDept=sc.next();
+		
+		System.out.println("Enter new email to Update:");
+		String newEmail=sc.next();
+		
+		System.out.println("Enter new phnNo to Update:");
+		String newPhnNo=sc.next();
+		
+		dao.updateEmployee(id,newName,newDept,newEmail,newPhnNo);
 		System.out.println("Employee updated Successfully");
   }
   
   public void updateUserLogin() throws IOException,ParseException{
-	  String id=loginObj.id;
+	  String id=EmployeeDaoImpl.id;
 	  String phnNo;
 	  while (true) {
 			try {

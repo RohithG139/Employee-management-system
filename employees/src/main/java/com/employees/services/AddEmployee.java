@@ -13,7 +13,7 @@ import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
 import com.employees.security.Roles;
-import com.employees.utils.GenerateId;
+import com.employees.utils.IdGenerator;
 import com.employees.utils.PasswordGenerator;
 import com.employees.utils.Util;
 
@@ -21,7 +21,7 @@ public class AddEmployee {
 	public void insert() throws IOException, ParseException {
 		Scanner sc = new Scanner(System.in);
 		EmployeeDao dao = new EmployeeDaoImpl();
-		GenerateId genObj = new GenerateId();
+		IdGenerator genObj = new IdGenerator();
 		String id = genObj.getId();
 
 		System.out.println("Enter name:");

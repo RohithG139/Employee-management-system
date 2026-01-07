@@ -2,9 +2,6 @@ package com.employees.controller;
 import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
-
-import com.employees.exceptions.IllegalEmailException;
-import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.services.AddEmployee;
 import com.employees.services.DeleteEmployee;
 import com.employees.services.FetchEmployee;
