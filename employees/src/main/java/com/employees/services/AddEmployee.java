@@ -1,28 +1,24 @@
 package com.employees.services;
 
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.json.simple.parser.ParseException;
 
 import com.employees.dao.EmployeeDao;
-import com.employees.dao.EmployeeDaoImpl;
+
+import com.employees.dao.ServerValidations;
 import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
 import com.employees.security.Roles;
-import com.employees.utils.IdGenerator;
-import com.employees.utils.PasswordGenerator;
+
 import com.employees.utils.Util;
 
 public class AddEmployee {
-	public void insert() throws IOException, ParseException {
+	public void insert(EmployeeDao dao)  {
 		Scanner sc = new Scanner(System.in);
-		EmployeeDao dao = new EmployeeDaoImpl();
-		IdGenerator genObj = new IdGenerator();
-		String id = genObj.getId();
+		
 
 		System.out.println("Enter name:");
 		String name = sc.next();
@@ -59,29 +55,29 @@ public class AddEmployee {
 				System.out.println(role);
 			}
 			try {
-			System.out.println("Enter role:");
-			String input = sc.next().toUpperCase();
-			
-			if (input.equals("EXIT")) {
-				break;
-			}
-			Roles role = Roles.valueOf(input);
-			
-			if (roles.add(role)) {
-				System.out.println("Role added successfully");
-			} else {
-				System.out.println("Role already added");
-			}
-			}catch(IllegalArgumentException e) {
+				System.out.println("Enter role:");
+				String input = sc.next().toUpperCase();
+
+				if (input.equals("EXIT")) {
+					break;
+				}
+				Roles role = Roles.valueOf(input);
+
+				if (roles.add(role)) {
+					System.out.println("Role added successfully");
+				} else {
+					System.out.println("Role already added");
+				}
+			} catch (IllegalArgumentException e) {
 				System.out.println("Provide valid role");
 				continue;
 			}
 		}
 
-		String password = "Tek@" + PasswordGenerator.generate();
+		String password = "Tek@" + Util.generate();
 		String hashedPassword = Util.hashPassword(password);
 
-		dao.addEmployee(new Employee(id, name, dept, email, phnNo, roles, hashedPassword));
+		dao.addEmployee(new Employee(name, dept, email, phnNo, roles, hashedPassword));
 		System.out.println("Employee added succesfully");
 		System.out.println("Your password:" + password);
 

@@ -1,7 +1,8 @@
 package com.employees.utils;
 
-import java.io.InputStream;
+
 import java.security.MessageDigest;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -9,7 +10,10 @@ import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 
 public class Util {
-	
+	private static final String EMP_ID_REGEX = "TEK[0-9]+";
+	public static boolean validId(String id) {
+		return id!=null && id.matches(EMP_ID_REGEX);
+	}
 	public static void validateEmail(String email){
 		Pattern emailPattern = Pattern.compile("^[A-Za-z09.]+@[A-Za-z0-9]+\\.[A-za-z]{2,}$");
 		Matcher matcher = emailPattern.matcher(email);
@@ -44,4 +48,7 @@ public class Util {
 		return null;
 	}
 	
+		public static String generate() {
+			return UUID.randomUUID().toString().substring(0,6);
+		}
 }

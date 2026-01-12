@@ -1,32 +1,27 @@
 package com.employees.services;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.Set;
 
-import org.json.simple.parser.ParseException;
-
-import com.employees.dao.EmployeeDaoImpl;
+import com.employees.dao.EmployeeDao;
+import com.employees.model.LoginResult;
 
 public class LoginValidator {
 	Scanner sc = new Scanner(System.in);
-	EmployeeDaoImpl dao=new EmployeeDaoImpl();
-	public boolean validate() throws ParseException, IOException{
-		boolean validUser = false;
-		while (!validUser) {
-			System.out.println("Enter username:");
-			String name = sc.next();
+	public LoginResult validate(EmployeeDao dao){
+
+		while (true) {
+			System.out.println("Enter id:");
+			String id = sc.next().toUpperCase();
 			System.out.println("Enter password");
 			String password = sc.next();
-			validUser=dao.validateUser(name, password);
-			if(validUser) {
-				return true;
+			LoginResult login=dao.validateUser(id, password);
+			if(login.getSuccess()) {
+				return login;
 			}
 			else {
-				System.out.println("Invalid credintials");
+				System.out.println("Invalid credentials");
 				continue;
 			}
 		}
-		return false;
 	}
 }

@@ -15,8 +15,7 @@ public class Employee {
 	public Employee() {
 		
 	}
-	public Employee(String id, String name, String dept, String email, String phnNo, Set<Roles> role, String password) {
-		this.id = id;
+	public Employee(String name, String dept, String email, String phnNo, Set<Roles> role, String password) {
 		this.name = name;
 		this.dept = dept;
 		this.email = email;

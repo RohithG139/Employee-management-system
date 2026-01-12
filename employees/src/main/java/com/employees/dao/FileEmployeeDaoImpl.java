@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
@@ -14,55 +15,59 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.employees.model.Employee;
+import com.employees.model.LoginResult;
 import com.employees.security.Roles;
-import com.employees.utils.PasswordGenerator;
 import com.employees.utils.Util;
 
+public class FileEmployeeDaoImpl implements EmployeeDao {
+	public static final String file = "Employees.json";
+	ServerValidations validations = new ServerValidations();
 
-public class EmployeeDaoImpl implements EmployeeDao {
-	PasswordGenerator passObj = new PasswordGenerator();
-	public static Set<Roles> roles;
-	public static String id;
-	public static final String file="Employees.json";
-	Util util =new Util();
-	public JSONArray readDataFromJson() throws ParseException, IOException{
+	Util util = new Util();
+	public JSONArray readDataFromJson() {
 		JSONParser parser = new JSONParser();
 		try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
 			return (JSONArray) parser.parse(reader);
+		} catch (IOException e) {
+			System.out.println("IO Error:" + e.getMessage());
+		} catch (ParseException e) {
+			System.out.println("Parser Error:" + e.getMessage());
 		}
+		return null;
 	}
 
-	public void writeDataToJson(JSONArray array) throws IOException {
+	public void writeDataToJson(JSONArray array) {
 		try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
 			writer.write(array.toJSONString());
-		}catch(IOException e) {
+			writer.flush();
+		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
 	}
 
-	public boolean validateUser(String name, String password) throws ParseException, IOException {
-			JSONArray employeesList = readDataFromJson();
-			for (Object employees : employeesList) {
-				JSONObject employee = (JSONObject) employees;
+	public LoginResult validateUser(String id, String password) {
+		JSONArray employeesList = readDataFromJson();
+		for (Object employees : employeesList) {
+			JSONObject employee = (JSONObject) employees;
 
-				if (employee.get("name").toString().equalsIgnoreCase(name)
-						&& employee.get("password").equals(Util.hashPassword(password))) {
+			if (employee.get("id").toString().equalsIgnoreCase(id)
+					&& employee.get("password").equals(Util.hashPassword(password))) {
 
-					JSONArray rolesArray = (JSONArray) employee.get("role");
+				JSONArray rolesArray = (JSONArray) employee.get("role");
 
-					Set<Roles> roleList = new HashSet<>();
-					for (Object roles : rolesArray) {
-						roleList.add(Roles.valueOf(roles.toString()));
-					}
-
-					EmployeeDaoImpl.roles = roleList;
-					EmployeeDaoImpl.id = employee.get("id").toString();
-
-					return true;
+				Set<Roles> roleList = new HashSet<>();
+				for (Object roles : rolesArray) {
+					roleList.add(Roles.valueOf(roles.toString()));
 				}
+
+				
+				String empId = employee.get("id").toString();
+
+				return new LoginResult(true,empId,roleList);
 			}
-		
-		return false;
+		}
+
+		return new LoginResult(false,null,null);
 	}
 
 	public boolean checkEmp(JSONArray array, String id) {
@@ -81,12 +86,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				+ "  |  PhnNo : " + emp.get("phnNo"));
 	}
 
-	public void addEmployee(Employee employee) throws ParseException, IOException {
-		
+	public void addEmployee(Employee employee) {
+
 		JSONArray employees = readDataFromJson();
 		JSONObject jsonObject = new JSONObject();
 
-		jsonObject.put("id", employee.getId());
+		jsonObject.put("id",validations.generateId(employees));
 		jsonObject.put("name", employee.getName());
 		jsonObject.put("dept", employee.getDept());
 		jsonObject.put("email", employee.getEmail());
@@ -100,19 +105,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 		employees.add(jsonObject);
 		writeDataToJson(employees);
-		
+
 	}
 
-	public void fetchEmployee() throws ParseException, IOException {
+	public void fetchEmployee() {
+
 		JSONArray employees = readDataFromJson();
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			print(employee);
 		}
-		
 	}
 
-	public void fetchEmployeeById(String id) throws ParseException, IOException {
+	public void fetchEmployeeById(String id) {
+
 		JSONArray employees = readDataFromJson();
 		if (!checkEmp(employees, id)) {
 			System.out.println("Employee not exist:");
@@ -127,7 +133,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		}
 	}
 
-	public void deleteEmployee(String id) throws ParseException, IOException {
+	public void deleteEmployee(String id) {
+
 		JSONArray employees = readDataFromJson();
 		if (!checkEmp(employees, id)) {
 			System.out.println("Employee not exist:");
@@ -144,7 +151,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	}
 
-	public void updateEmployee(String id, String name,String dept,String email,String phnNo) throws ParseException, IOException {
+	public void updateEmployee(String id, Map<String, String> map) {
+
 		JSONArray employees = readDataFromJson();
 		if (!checkEmp(employees, id)) {
 			System.out.println("Employee not exist:");
@@ -153,17 +161,37 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
-				employee.put("name", name);
-				employee.put("dept", dept);
-				employee.put("email", email);
-				employee.put("phnNo", phnNo);
+				for (Map.Entry<String, String> entry : map.entrySet()) {
+					if (entry.getValue() != null) {
+						employee.put(entry.getKey(), entry.getValue());
+
+					}
+				}
 				writeDataToJson(employees);
 				return;
 			}
 		}
 	}
 
-	public void resetPassword(String id, String password) throws ParseException, IOException {
+	public void resetPassword(String id, String password) {
+
+		JSONArray employees = readDataFromJson();
+		if (!checkEmp(employees, id)) {
+			System.out.println("Employee not exist:");
+			return;
+		}
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				employee.put("password", password);
+				writeDataToJson(employees);
+				return;
+			}
+		}
+
+	}
+
+	public void changePassword(String id, String password) {
 
 		JSONArray employees = readDataFromJson();
 		if (!checkEmp(employees, id)) {
@@ -178,36 +206,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				return;
 			}
 		}
-
-	}
-
-	public void changePassword(String id, String password) throws ParseException, IOException {
-		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
-			System.out.println("Employee not exist:");
-			return;
-		}
-		for (Object obj : employees) {
-			JSONObject employee = (JSONObject) obj;
-			if (employee.get("id").equals(id)) {
-				employee.put("password", password);
-				writeDataToJson(employees);
-				return;
-			}
-		}
-	}
-
-	public void updateUserLogin(String id, String phnNo) throws ParseException, IOException {
-		JSONArray employees = readDataFromJson();
-		for (Object obj : employees) {
-			JSONObject employee = (JSONObject) obj;
-			if (employee.get("id").equals(id)) {
-				employee.put("phnNo", phnNo);
-				writeDataToJson(employees);
-				return;
-			}
-		}
-		
 
 	}
 }
