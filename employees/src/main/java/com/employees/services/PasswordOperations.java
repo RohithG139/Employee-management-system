@@ -18,11 +18,10 @@ public class PasswordOperations {
 			System.out.println("please Enter valid id");
 			return;
 		}
-		String password = "Tek@" + Util.generate();
+		String password = "Tek@" + Util.generatePassword();
 		System.out.println("Your reset password:" + password);
 		String hashedPassword = Util.hashPassword(password);
 		dao.resetPassword(id, hashedPassword);
-		System.out.println("Password reset successfully");
 	}
 
 	public void changePassword(EmployeeDao dao){
@@ -31,6 +30,6 @@ public class PasswordOperations {
 		System.out.println("Enter new password:");
 		String newPass = sc.next();
 		dao.changePassword(id, Util.hashPassword(newPass));
-		System.out.println("password is changed Successfully.");
+		
 	}
 }

@@ -14,6 +14,7 @@ import com.employees.services.FetchEmployee;
 import com.employees.services.LoginValidator;
 import com.employees.services.PasswordOperations;
 import com.employees.services.UpdateEmployee;
+import com.employees.services.UpdateRoles;
 
 public class Menu {
 
@@ -26,6 +27,7 @@ public class Menu {
 		DeleteEmployee deleteEmployee = new DeleteEmployee();
 		FetchEmployee fetchEmployee = new FetchEmployee();
 		PasswordOperations passwordOperations = new PasswordOperations();
+		UpdateRoles updateRoles=new UpdateRoles();
 		LoginValidator validator=new LoginValidator();
 		RolePermission rolePermission = new RolePermission();
 
@@ -70,6 +72,12 @@ public class Menu {
 				}
 				if (choice == Operations.CHANGEPASSWORD) {
 					passwordOperations.changePassword(dao);
+				}
+				if (choice == Operations.ASSIGNROLE) {
+					updateRoles.assignRole(dao);
+				}
+				if (choice == Operations.REVOKEROLE) {
+					updateRoles.revokeRole(dao);
 				}
 				if (choice == Operations.EXIT) {
 					System.out.println("EXIT...");

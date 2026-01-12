@@ -48,7 +48,7 @@ public class Util {
 		return null;
 	}
 	
-		public static String generate() {
+		public static String generatePassword() {
 			return UUID.randomUUID().toString().substring(0,6);
 		}
 }

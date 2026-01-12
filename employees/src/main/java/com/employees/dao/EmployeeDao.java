@@ -1,9 +1,8 @@
 package com.employees.dao;
 
-import java.util.Map;
-
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
+import com.employees.security.Roles;
 
 public interface EmployeeDao {
 	void addEmployee(Employee e);
@@ -14,11 +13,15 @@ public interface EmployeeDao {
 
 	void deleteEmployee(String id);
 
-	void updateEmployee(String id, Map<String, String> map);
+	void updateEmployee(Employee emp, Roles role);
 
 	void resetPassword(String id, String password);
 
 	void changePassword(String id, String password);
 	
-	LoginResult validateUser(String id,String password);
+	void assignRole(String id,Roles role);
+	
+	void revokeRole(String id,Roles role);
+	
+	LoginResult validateUser(String id, String password);
 }

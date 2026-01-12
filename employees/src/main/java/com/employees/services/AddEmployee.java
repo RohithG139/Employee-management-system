@@ -7,7 +7,7 @@ import java.util.Set;
 
 import com.employees.dao.EmployeeDao;
 
-import com.employees.dao.ServerValidations;
+
 import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
@@ -74,12 +74,12 @@ public class AddEmployee {
 			}
 		}
 
-		String password = "Tek@" + Util.generate();
+		String password = "Tek@" + Util.generatePassword();
 		String hashedPassword = Util.hashPassword(password);
 
 		dao.addEmployee(new Employee(name, dept, email, phnNo, roles, hashedPassword));
-		System.out.println("Employee added succesfully");
+		
 		System.out.println("Your password:" + password);
-
+		dao.fetchEmployee();
 	}
 }

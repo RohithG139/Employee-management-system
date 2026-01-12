@@ -16,6 +16,8 @@ public class RolePermission {
 				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.DELETE,
 				Operations.RESETPASSWORD,
+				Operations.ASSIGNROLE,
+				Operations.REVOKEROLE,
 				Operations.EXIT
 				));
 		

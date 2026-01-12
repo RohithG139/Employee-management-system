@@ -16,6 +16,6 @@ public class DeleteEmployee {
 		}
 
 		dao.deleteEmployee(id);
-		System.out.println("Employee deleted Successfully");
+		dao.fetchEmployee();
 	}
 }

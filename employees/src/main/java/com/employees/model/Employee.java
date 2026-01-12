@@ -12,9 +12,9 @@ public class Employee {
 	private String phnNo;
 	private Set<Roles> role;
 	private String password;
-	public Employee() {
-		
-	}
+
+
+
 	public Employee(String name, String dept, String email, String phnNo, Set<Roles> role, String password) {
 		this.name = name;
 		this.dept = dept;
@@ -22,6 +22,18 @@ public class Employee {
 		this.phnNo = phnNo;
 		this.role = role;
 		this.password = password;
+	}
+
+	public Employee(String id,String name, String dept, String email, String phnNo) {
+		this.id=id;
+		this.name = name;
+		this.dept = dept;
+		this.email = email;
+		this.phnNo = phnNo;
+
+	}
+	public Employee(String id,String phnNo) {
+		this.phnNo=phnNo;
 	}
 
 	public String getId() {
@@ -35,30 +47,31 @@ public class Employee {
 	public String getDept() {
 		return dept;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public String getPhnNo() {
 		return phnNo;
 	}
-	
+
 	public Set<Roles> getRole() {
 		return role;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setId(String id) {
-		this.id=id;
+		this.id = id;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	
 	public void setDept(String dept) {
 		this.dept = dept;
 	}
@@ -66,17 +79,17 @@ public class Employee {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	public void setPhnNo(String phnNo) {
 		this.phnNo = phnNo;
 	}
-	
+
 	public void setRole(Set<Roles> role) {
 		this.role = role;
 	}
-	
+
 	public void setPassword(String password) {
-		this.password=password;
+		this.password = password;
 	}
-	
+
 }
