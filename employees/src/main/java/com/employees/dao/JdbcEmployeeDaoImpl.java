@@ -139,28 +139,31 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		}
 	}
 
+
 	public void fetchEmployee() {
-		String fetchQuery = "select e1.emp_id, e1.emp_name, e1.dept, e1.email, e1.phnNo, "
-				+ "string_agg(e2.roles::text,',' ) as all_roles "
-				+ "from employees e1 join emp_roles e2 on e1.emp_id = e2.emp_id "
-				+ "group by e1.emp_id order by e1.emp_id";
+		String fetchQuery = "select * from employees";
+		String fetchRoles = "select roles from emp_roles where emp_id=?";
 
 		try (Connection conn = DbConnection.getConnection()) {
-			try (Statement stmt = conn.createStatement()) {
+			try (Statement stmt = conn.createStatement(); PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
+
 				ResultSet rs = stmt.executeQuery(fetchQuery);
-				if (!rs.next()) {
-					System.out.println("No Employees exist");
-					return;
-				}
-				do {
-					Set<String> rolesList = new HashSet<>();
-					String roles = rs.getString("all_roles");
-					rolesList.addAll(Arrays.asList(roles.split(",")));
+
+				while (rs.next()) {
+					String id=rs.getString("emp_id");
+					psmt.setString(1, id);
+					ResultSet rs1 = psmt.executeQuery();
+
 					System.out.print("id:" + rs.getString("emp_id") + " | " + "name:" + rs.getString("emp_name") + "|"
 							+ "dept:" + rs.getString("dept") + "|" + "email:" + rs.getString("email") + "|" + "phnNo:"
-							+ rs.getString("phnNO") + "|" + "roles:" + rolesList);
+							+ rs.getString("phnNO") + "|" + "role: [");
+					while (rs1.next()) {
+						System.out.print(rs1.getString(1) + " ");
+
+					}
+					System.out.print("]");
 					System.out.println();
-				} while (rs.next());
+				}
 
 			} catch (SQLException e) {
 				System.out.println("Statement error:" + e.getMessage());
@@ -171,37 +174,37 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public void fetchEmployeeById(String id) {
-		String query = "select e1.emp_id, e1.emp_name, e1.dept, e1.email, e1.phnNo, "
-				+ "string_agg(e2.roles::text,',' ) as all_roles "
-				+ "from employees e1 join emp_roles e2 on e1.emp_id = e2.emp_id where e1.emp_id=? "
-				+ "group by e1.emp_id";
+		String fetchQuery = "select * from employees where emp_id=?";
+		String fetchRoles = "select roles from emp_roles where emp_id=?";
+
 		try (Connection conn = DbConnection.getConnection()) {
-			if (!checkEmp(id, conn)) {
-				System.out.println("Employee doesnt exist");
-				return;
-			}
-			try (PreparedStatement stmt = conn.prepareStatement(query)) {
+			try (PreparedStatement stmt = conn.prepareStatement(fetchQuery);
+					PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
 				stmt.setString(1, id);
 				ResultSet rs = stmt.executeQuery();
-				if (!rs.next()) {
-					System.out.println("No employee exist with id");
-					return;
+
+				while (rs.next()) {
+
+					psmt.setString(1, id);
+					ResultSet rs1 = psmt.executeQuery();
+
+					System.out.print("id:" + rs.getString("emp_id") + " | " + "name:" + rs.getString("emp_name") + "|"
+							+ "dept:" + rs.getString("dept") + "|" + "email:" + rs.getString("email") + "|" + "phnNo:"
+							+ rs.getString("phnNO") + "|" + "role: [");
+					while (rs1.next()) {
+						System.out.print(rs1.getString(1) + " ");
+
+					}
+					System.out.print("]");
+					System.out.println();
 				}
-				Set<String> rolesList = new HashSet<>();
-				String roles = rs.getString("all_roles");
-				rolesList.addAll(Arrays.asList(roles.split(",")));
-				System.out.print("id:" + rs.getString("emp_id") + " | " + "name:" + rs.getString("emp_name") + "|"
-						+ "dept:" + rs.getString("dept") + "|" + "email:" + rs.getString("email") + "|" + "phnNo:"
-						+ rs.getString("phnNO") + "|" + "roles:" + rolesList);
-				System.out.println();
 
 			} catch (SQLException e) {
 				System.out.println("Statement error:" + e.getMessage());
 			}
 		} catch (SQLException e) {
-			System.out.println("Connection error:" + e.getMessage());
+			System.out.println(e.getMessage());
 		}
-
 	}
 
 	public void deleteEmployee(String id) {
@@ -324,19 +327,19 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				System.out.println("Employee doesnt exist");
 				return;
 			}
-			if(checkRoleExists(id,role,conn)) {
+			if (checkRoleExists(id, role, conn)) {
 				System.out.println("Role already exist");
 				return;
 			}
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				stmt.setObject(2, role.name(), java.sql.Types.OTHER);
-				int row=stmt.executeUpdate();
+				int row = stmt.executeUpdate();
 				if (row != 0) {
 					System.out.println("role is assigned succesfully");
 					return;
 				}
-				
+
 			} catch (SQLException e) {
 				System.out.println("Statement error:" + e.getMessage());
 			}
@@ -347,25 +350,25 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public void revokeRole(String id, Roles role) {
-		String query="delete  from emp_roles where emp_id=? and roles=?";
+		String query = "delete  from emp_roles where emp_id=? and roles=?";
 		try (Connection conn = DbConnection.getConnection()) {
 			if (!checkEmp(id, conn)) {
 				System.out.println("Employee doesnt exist");
 				return;
 			}
-			if(!checkRoleExists(id,role,conn)) {
+			if (!checkRoleExists(id, role, conn)) {
 				System.out.println("Role not exist");
 				return;
 			}
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				stmt.setObject(2, role.name(), java.sql.Types.OTHER);
-				int row=stmt.executeUpdate();
+				int row = stmt.executeUpdate();
 				if (row != 0) {
 					System.out.println("role is revoked succesfully");
 					return;
 				}
-				
+
 			} catch (SQLException e) {
 				System.out.println("Statement error:" + e.getMessage());
 			}

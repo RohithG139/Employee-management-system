@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import org.json.simple.JSONArray;
@@ -221,11 +220,48 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public void assignRole(String id,Roles role) {
+		JSONArray employees = readDataFromJson();
+		if (!checkEmp(employees, id)) {
+			System.out.println("Employee not exist:");
+			return;
+		}
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				JSONArray roles=(JSONArray) employee.get("role");
+				if (roles.contains(role.toString())) {
+				    System.out.println("role already exist");
+				    return;
+				}
+				roles.add(role.toString());
+				writeDataToJson(employees);
+				System.out.println("role assigned succesfully");
+				return;
+			}
+		}
 		
 	}
 
 	public void revokeRole(String id,Roles role) {
-
+		JSONArray employees = readDataFromJson();
+		if (!checkEmp(employees, id)) {
+			System.out.println("Employee not exist:");
+			return;
+		}
+		for (Object obj : employees) {
+			JSONObject employee = (JSONObject) obj;
+			if (employee.get("id").equals(id)) {
+				JSONArray roles=(JSONArray) employee.get("role");
+				if (!roles.contains(role.toString())) {
+				    System.out.println("role not exist");
+				    return;
+				}
+				roles.remove(role.toString());
+				writeDataToJson(employees);
+				System.out.println("role revoked succesfully");
+				return;
+			}
+		}
 	}
 
 }
