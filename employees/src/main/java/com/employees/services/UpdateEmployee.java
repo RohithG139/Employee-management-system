@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.employees.controller.Menu;
 import com.employees.dao.EmployeeDao;
+import com.employees.exceptions.IllegalEmailException;
 import com.employees.exceptions.IllegalPhnNoException;
 import com.employees.model.Employee;
 import com.employees.security.Roles;
@@ -18,18 +19,32 @@ public class UpdateEmployee {
 		if (!Menu.currentUser.getRoles().contains(Roles.ADMIN) && !Menu.currentUser.getRoles().contains(Roles.MANAGER)) {
 		    id = Menu.currentUser.getEmpId();
 		    role=Roles.EMPLOYEE;
-			String phnNo;
-			while (true) {
-				try {
-					System.out.println("Enter new phnNo:");
-					phnNo = sc.next();
-					Util.validatePhnNo(phnNo);
-					dao.updateEmployee(new Employee(id,phnNo),role);
-					break;
-				} catch (IllegalPhnNoException e) {
-					System.out.println(e.getMessage());
-				}
-			}
+		    String email = "";
+	        while (true) {
+	            try {
+	                System.out.println("Enter email:");
+	                email = sc.nextLine();
+	                Util.validateEmail(email);
+	                break;
+	            } catch (IllegalEmailException e) {
+	                System.out.println("Invalid email:"+e.getMessage());
+	            }
+	        }
+
+	        
+	        String phnNo = "";
+	        while (true) {
+	            try {
+	                System.out.println("Enter phnNo:");
+	                phnNo = sc.nextLine();
+	                Util.validatePhnNo(phnNo);
+	                break;
+	            } catch (IllegalPhnNoException e) {
+	                System.out.println("Invalid phnNo:"+e.getMessage());
+	            }
+	        }
+	        dao.updateEmployee(new Employee(id,phnNo,email), role);
+			
 		} else {
 			role=Roles.ADMIN;
 			System.out.println("Enter Id to Update:");
@@ -38,17 +53,52 @@ public class UpdateEmployee {
 				System.out.println("please Enter valid id");
 				return;
 			}
-			System.out.println("Enter new name to Update:");
-			String newName = sc.next();
-			System.out.println("Enter new dept to Update:");
-			String newDept = sc.next();
+			sc.nextLine();
+			 String name = "";
+		        while (true) {
+		            System.out.println("Enter name:");
+		            name = sc.nextLine();
+		            if (Util.validateName(name)) {
+		                break;
+		            }
+		            System.out.println("Invalid name. Name cannot be empty.");
+		        }
+
+		        String dept = "";
+		        while (true) {
+		            System.out.println("Enter dept:");
+		            dept = sc.nextLine();
+		            if (Util.validateDept(dept)) {
+		                break;
+		            }
+		            System.out.println("Invalid department. Dept cannot be empty.");
+		        }
 			
-			System.out.println("Enter new email to Update:");
-			String newEmail = sc.next();
-			
-			System.out.println("Enter new phnNo to Update:");
-			String newPhnNo = sc.next();
-			dao.updateEmployee(new Employee(id,newName,newDept,newEmail,newPhnNo),role);
+		        String email = "";
+		        while (true) {
+		            try {
+		                System.out.println("Enter email:");
+		                email = sc.nextLine();
+		                Util.validateEmail(email);
+		                break;
+		            } catch (IllegalEmailException e) {
+		                System.out.println("Invalid email:"+e.getMessage());
+		            }
+		        }
+
+		        
+		        String phnNo = "";
+		        while (true) {
+		            try {
+		                System.out.println("Enter phnNo:");
+		                phnNo = sc.nextLine();
+		                Util.validatePhnNo(phnNo);
+		                break;
+		            } catch (IllegalPhnNoException e) {
+		                System.out.println("Invalid phnNo:"+e.getMessage());
+		            }
+		        }
+			dao.updateEmployee(new Employee(id,name,dept,email,phnNo),role);
 		}
 		
 		dao.fetchEmployee();

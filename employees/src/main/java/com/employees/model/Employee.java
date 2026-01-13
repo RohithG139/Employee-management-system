@@ -32,8 +32,9 @@ public class Employee {
 		this.phnNo = phnNo;
 
 	}
-	public Employee(String id,String phnNo) {
+	public Employee(String id,String phnNo,String email) {
 		this.phnNo=phnNo;
+		this.email=email;
 	}
 
 	public String getId() {

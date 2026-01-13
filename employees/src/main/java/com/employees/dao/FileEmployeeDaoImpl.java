@@ -172,6 +172,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 				} else {
 
 					employee.put("phnNo", emp.getPhnNo());
+					employee.put("email", emp.getEmail());
 				}
 
 				writeDataToJson(employees);

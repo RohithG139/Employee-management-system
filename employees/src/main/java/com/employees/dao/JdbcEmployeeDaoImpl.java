@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -131,14 +130,20 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				conn.commit();
 				System.out.println("Employee added succesfully");
 			} catch (SQLException e) {
-				System.out.println("Statement error:" + e.getMessage());
+				if (conn != null) {
+					try {
+						System.err.println("Transaction is being rolled back due to: " + e.getMessage());
+						conn.rollback();
+					} catch (SQLException ex) {
+						System.err.println("Error during rollback: " + ex.getMessage());
+					}
+				}
 			}
 		} catch (SQLException e1) {
 
 			System.out.println("connection error:" + e1.getMessage());
 		}
 	}
-
 
 	public void fetchEmployee() {
 		String fetchQuery = "select * from employees";
@@ -150,7 +155,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				ResultSet rs = stmt.executeQuery(fetchQuery);
 
 				while (rs.next()) {
-					String id=rs.getString("emp_id");
+					String id = rs.getString("emp_id");
 					psmt.setString(1, id);
 					ResultSet rs1 = psmt.executeQuery();
 
@@ -232,7 +237,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 	public void updateEmployee(Employee emp, Roles role) {
 		String adminUpdate = "update employees set emp_name=?,dept=?,email=?,phnNo=? where emp_id=?";
-		String empUpdate = "update employees set phnNo=? where emp_id=?";
+		String empUpdate = "update employees set phnNo=? email=? where emp_id=?";
 
 		try (Connection conn = DbConnection.getConnection()) {
 			if (!checkEmp(emp.getId(), conn)) {
@@ -255,8 +260,8 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 				} else {
 					stmt.setString(1, emp.getPhnNo());
-
-					stmt.setString(2, emp.getId());
+					stmt.setString(2, emp.getEmail());
+					stmt.setString(3, emp.getId());
 					int row = stmt.executeUpdate();
 					if (row != 0) {
 						System.out.println("updated succesfully");
