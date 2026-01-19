@@ -1,4 +1,4 @@
-package com.employees.security;
+package com.employees.enums;
 
 import java.util.EnumSet;
 import java.util.HashMap;
@@ -25,6 +25,7 @@ public class RolePermission {
 				Operations.FETCH,
 				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.UPDATE,
+				Operations.CHANGEPASSWORD,
 				Operations.EXIT
 				));
 		

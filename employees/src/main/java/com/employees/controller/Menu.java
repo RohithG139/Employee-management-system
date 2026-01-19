@@ -4,10 +4,10 @@ import java.util.Scanner;
 import java.util.Set;
 
 import com.employees.dao.EmployeeDao;
+import com.employees.enums.Operations;
+import com.employees.enums.RolePermission;
+import com.employees.enums.Roles;
 import com.employees.model.LoginResult;
-import com.employees.security.Operations;
-import com.employees.security.RolePermission;
-import com.employees.security.Roles;
 import com.employees.services.AddEmployee;
 import com.employees.services.DeleteEmployee;
 import com.employees.services.FetchEmployee;
@@ -35,7 +35,8 @@ public class Menu {
 		if (login == null)
 			return;
 		Set<Roles> roles = login.getRoles();
-		Menu.currentUser = login;
+		Menu.currentUser = login;  //currently who are logged in
+		
 		while (true) {
 			for (Operations operation : Operations.values()) {
 				if (rolePermission.hasAccess(roles, operation)) {

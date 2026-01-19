@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.employees.dao.EmployeeDao;
 import com.employees.model.LoginResult;
+import com.employees.utils.Util;
 
 public class LoginValidator {
 	Scanner sc = new Scanner(System.in);
@@ -14,7 +15,7 @@ public class LoginValidator {
 			String id = sc.next().toUpperCase();
 			System.out.println("Enter password");
 			String password = sc.next();
-			LoginResult login=dao.validateUser(id, password);
+			LoginResult login=dao.validateUser(id, Util.hashPassword(password));
 			if(login.getSuccess()) {
 				return login;
 			}

@@ -13,9 +13,9 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import com.employees.enums.Roles;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
-import com.employees.security.Roles;
 import com.employees.utils.Util;
 
 public class FileEmployeeDaoImpl implements EmployeeDao {
@@ -50,8 +50,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 		for (Object employees : employeesList) {
 			JSONObject employee = (JSONObject) employees;
 
-			if (employee.get("id").toString().equalsIgnoreCase(id)
-					&& employee.get("password").equals(Util.hashPassword(password))) {
+			if (employee.get("id").toString().equalsIgnoreCase(id) && employee.get("password").equals(password)) {
 
 				JSONArray rolesArray = (JSONArray) employee.get("role");
 
@@ -69,7 +68,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 		return new LoginResult(false, null, null);
 	}
 
-	private boolean checkEmp(JSONArray array, String id) {
+	private boolean checkEmpExists(JSONArray array, String id) {
 		for (Object obj : array) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
@@ -78,6 +77,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 		}
 		return false;
 	}
+
 
 	public static void print(JSONObject emp) {
 		System.out.println("ID:" + emp.get("id") + "|  Name: " + emp.get("name") + "  |  " + "  Department: "
@@ -119,7 +119,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	public void fetchEmployeeById(String id) {
 
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
@@ -135,7 +135,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	public void deleteEmployee(String id) {
 
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
@@ -153,7 +153,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	public void updateEmployee(Employee emp, Roles role) {
 		JSONArray employees = readDataFromJson();
 
-		if (!checkEmp(employees, emp.getId())) {
+		if (!checkEmpExists(employees, emp.getId())) {
 			System.out.println("Employee does not exist.");
 			return;
 		}
@@ -185,7 +185,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	public void resetPassword(String id, String password) {
 
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
@@ -204,7 +204,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 	public void changePassword(String id, String password) {
 
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
@@ -220,44 +220,46 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 
 	}
 
-	public void assignRole(String id,Roles role) {
+	public void assignRole(String id, Roles role) {
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
-				JSONArray roles=(JSONArray) employee.get("role");
+				JSONArray roles = (JSONArray) employee.get("role");
 				if (roles.contains(role.toString())) {
-				    System.out.println("role already exist");
-				    return;
+					System.out.println("role already exist");
+					return;
 				}
+				
 				roles.add(role.toString());
 				writeDataToJson(employees);
 				System.out.println("role assigned succesfully");
 				return;
 			}
 		}
-		
+
 	}
 
-	public void revokeRole(String id,Roles role) {
+	public void revokeRole(String id, Roles role) {
 		JSONArray employees = readDataFromJson();
-		if (!checkEmp(employees, id)) {
+		if (!checkEmpExists(employees, id)) {
 			System.out.println("Employee not exist:");
 			return;
 		}
+
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
-				JSONArray roles=(JSONArray) employee.get("role");
-				if (!roles.contains(role.toString())) {
-				    System.out.println("role not exist");
-				    return;
+				JSONArray rolesArray = (JSONArray) employee.get("role");
+				if (!rolesArray.contains(role.toString())) {
+					System.out.println("role not exist");
+					return;
 				}
-				roles.remove(role.toString());
+				rolesArray.remove(role.toString());
 				writeDataToJson(employees);
 				System.out.println("role revoked succesfully");
 				return;

@@ -3,7 +3,7 @@ package com.employees.services;
 import java.util.Scanner;
 
 import com.employees.dao.EmployeeDao;
-import com.employees.security.Roles;
+import com.employees.enums.Roles;
 import com.employees.utils.Util;
 
 public class UpdateRoles {

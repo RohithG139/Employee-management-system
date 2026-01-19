@@ -25,7 +25,7 @@ public class PasswordOperations {
 	}
 
 	public void changePassword(EmployeeDao dao){
-		 String id = Menu.currentUser.getEmpId();
+		String id = Menu.currentUser.getEmpId();
 
 		System.out.println("Enter new password:");
 		String newPass = sc.next();

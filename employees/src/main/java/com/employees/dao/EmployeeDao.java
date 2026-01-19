@@ -1,8 +1,8 @@
 package com.employees.dao;
 
+import com.employees.enums.Roles;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
-import com.employees.security.Roles;
 
 public interface EmployeeDao {
 	void addEmployee(Employee e);

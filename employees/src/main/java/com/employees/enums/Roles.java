@@ -1,4 +1,4 @@
-package com.employees.security;
+package com.employees.enums;
 
 public enum Roles {
 	ADMIN,

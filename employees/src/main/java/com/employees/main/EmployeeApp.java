@@ -5,14 +5,13 @@ import java.util.Scanner;
 import com.employees.controller.Menu;
 import com.employees.dao.FileEmployeeDaoImpl;
 import com.employees.dao.JdbcEmployeeDaoImpl;
-import com.employees.storageType.Storage;
+import com.employees.enums.Storage;
 
 public class EmployeeApp {
 
 	public static void main(String args[]) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Select Storage?");
-		
 		
 		while (true) {
 			for(Storage value:Storage.values()) {
@@ -25,14 +24,11 @@ public class EmployeeApp {
 				case FILE:
 					Menu.showMenu(new FileEmployeeDaoImpl());
 					break;
-				case POSTGRESQL:
+				case DB:
 					Menu.showMenu(new JdbcEmployeeDaoImpl());
 					break;
-
 				}
-			} catch (
-
-			IllegalArgumentException e) {
+			} catch (IllegalArgumentException e) {
 				System.out.println("invalid storage option");
 			}
 

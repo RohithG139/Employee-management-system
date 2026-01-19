@@ -2,7 +2,7 @@ package com.employees.model;
 
 import java.util.Set;
 
-import com.employees.security.Roles;
+import com.employees.enums.Roles;
 
 public class LoginResult {
     private boolean success;
