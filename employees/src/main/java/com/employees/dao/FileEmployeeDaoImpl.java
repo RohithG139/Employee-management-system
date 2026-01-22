@@ -14,6 +14,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import com.employees.enums.Roles;
+import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
 import com.employees.utils.Util;
@@ -49,9 +51,12 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 		JSONArray employeesList = readDataFromJson();
 		for (Object employees : employeesList) {
 			JSONObject employee = (JSONObject) employees;
-
-			if (employee.get("id").toString().equalsIgnoreCase(id) && employee.get("password").equals(password)) {
-
+			
+			if(employee.get("id").toString().equalsIgnoreCase(id)) {
+				if(!employee.get("password").equals(password)) {
+					return null;
+				}
+			
 				JSONArray rolesArray = (JSONArray) employee.get("role");
 
 				Set<Roles> roleList = new HashSet<>();
@@ -61,11 +66,11 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 
 				String empId = employee.get("id").toString();
 
-				return new LoginResult(true, empId, roleList);
+				return new LoginResult(empId, roleList);
 			}
+		
 		}
-
-		return new LoginResult(false, null, null);
+		return null;
 	}
 
 	private boolean checkEmpExists(JSONArray array, String id) {
@@ -77,6 +82,8 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 		}
 		return false;
 	}
+
+	
 
 
 	public static void print(JSONObject emp) {
@@ -176,47 +183,32 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 				}
 
 				writeDataToJson(employees);
-				System.out.println("Employee updated successfully.");
 				return;
 			}
 		}
 	}
 
-	public void resetPassword(String id, String password) {
+	public boolean resetPassword(String id, String password) {
 
 		JSONArray employees = readDataFromJson();
 		if (!checkEmpExists(employees, id)) {
-			System.out.println("Employee not exist:");
-			return;
+			return false;
 		}
 		for (Object obj : employees) {
 			JSONObject employee = (JSONObject) obj;
 			if (employee.get("id").equals(id)) {
 				employee.put("password", password);
 				writeDataToJson(employees);
-				System.out.println("password reset succesfully.");
-				return;
+				return true;
 			}
 		}
-
+		return false;
+		
 	}
 
-	public void changePassword(String id, String password) {
+	public boolean changePassword(String id, String password) {
 
-		JSONArray employees = readDataFromJson();
-		if (!checkEmpExists(employees, id)) {
-			System.out.println("Employee not exist:");
-			return;
-		}
-		for (Object obj : employees) {
-			JSONObject employee = (JSONObject) obj;
-			if (employee.get("id").equals(id)) {
-				employee.put("password", password);
-				writeDataToJson(employees);
-				System.out.println("password changed succesfully.");
-				return;
-			}
-		}
+		return resetPassword(id,password);
 
 	}
 

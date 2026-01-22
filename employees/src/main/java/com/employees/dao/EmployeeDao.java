@@ -15,9 +15,9 @@ public interface EmployeeDao {
 
 	void updateEmployee(Employee emp, Roles role);
 
-	void resetPassword(String id, String password);
+	boolean resetPassword(String id, String password);
 
-	void changePassword(String id, String password);
+	boolean changePassword(String id, String password);
 	
 	void assignRole(String id,Roles role);
 	

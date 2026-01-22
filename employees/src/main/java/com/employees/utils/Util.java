@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.employees.enums.Roles;
+import com.employees.exceptions.ValidationException;
 
 public class Util {
 	private static final String EMP_ID_REGEX = "TEK[0-9]+";
@@ -65,7 +66,6 @@ public class Util {
 		if (role == null || role.trim().isEmpty()) {
 			return false;
 		}
-
 		try {
 			Roles.valueOf(role.toUpperCase().trim());
 			return true;

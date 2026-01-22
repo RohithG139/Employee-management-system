@@ -1,35 +1,39 @@
 package com.employees.services;
 
-import java.util.Scanner;
-
-import com.employees.controller.Menu;
 import com.employees.dao.EmployeeDao;
+import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ValidationException;
 import com.employees.utils.Util;
 
 public class PasswordOperations {
-	
-	Scanner sc = new Scanner(System.in);
 
-	public void resetPassword(EmployeeDao dao) {
+	public String resetPasswordService(EmployeeDao dao, String id) {
 
-		System.out.println("Enter id for resetting password:");
-		String id = sc.next().toUpperCase();
 		if (!Util.validId(id)) {
-			System.out.println("please Enter valid id");
-			return;
+			throw new ValidationException("Invalid id");
 		}
 		String password = "Tek@" + Util.generatePassword();
-		System.out.println("Your reset password:" + password);
-		String hashedPassword = Util.hashPassword(password);
-		dao.resetPassword(id, hashedPassword);
+
+		boolean result = dao.resetPassword(id, Util.hashPassword(password));
+		if (!result) {
+			throw new EmployeeNotFoundException("employee not found");
+		}
+
+		return password;
 	}
 
-	public void changePassword(EmployeeDao dao){
-		String id = Menu.currentUser.getEmpId();
+	public void changePasswordService(EmployeeDao dao, String id, String password) {
 
-		System.out.println("Enter new password:");
-		String newPass = sc.next();
-		dao.changePassword(id, Util.hashPassword(newPass));
-		
+		if (!Util.validId(id)) {
+			throw new ValidationException("Invalid id");
+		}
+		if (!Util.validatePassword(password)) {
+			throw new ValidationException("Invalid password");
+		}
+		boolean result = dao.changePassword(id, Util.hashPassword(password));
+		if (!result) {
+			throw new EmployeeNotFoundException("employee not found");
+		}
+
 	}
 }

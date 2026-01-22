@@ -9,6 +9,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.employees.enums.Roles;
+import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
 import com.employees.utils.Util;
@@ -27,15 +29,14 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				ResultSet rs = ps.executeQuery();
 
 				if (!rs.next()) {
-					System.out.println("Invalid id");
-					return new LoginResult(false, null, null);
+					return null;
 				}
 
 				String dbPass = rs.getString("password");
 
 				if (!dbPass.equals(password)) {
-					System.out.println("Invalid password");
-					return new LoginResult(false, null, null);
+					
+					return null;
 				}
 
 				Set<Roles> roles = new HashSet<>();
@@ -46,14 +47,13 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				while (rs2.next()) {
 					roles.add(Roles.valueOf(rs2.getString("roles")));
 				}
-				return new LoginResult(true, id, roles);
+				return new LoginResult( id, roles);
 
 			}
 		} catch (SQLException e) {
 			System.out.println("login validating error:" + e.getMessage());
-
 		}
-		return new LoginResult(false, null, null);
+		return  null;
 	}
 
 	private boolean checkRoleExists(String id, Roles role, Connection conn) {
@@ -276,32 +276,31 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		}
 	}
 
-	public void resetPassword(String id, String password) {
+	public boolean resetPassword(String id, String password) {
 		String query = "update emp_auth set password=? where emp_id=?";
 		try (Connection conn = Util.getConnection();) {
 			
 			if (!checkEmpExists(id, conn)) {
-				System.out.println("Employee doesnt exist");
-				return;
+				return false;
 			}
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, password);
 				stmt.setString(2, id);
 				int row = stmt.executeUpdate();
 				if (row != 0) {
-					System.out.println("reset password succesfully");
-					return;
+					return true;
 				}
 				
 			}
 		} catch (SQLException e) {
 			System.out.println("error during updating password:" + e.getMessage());
 		}
+		return false;
 	}
 
-	public void changePassword(String id, String password) {
+	public boolean changePassword(String id, String password) {
 
-		resetPassword(id, password);
+		return resetPassword(id, password);
 	}
 
 	public void assignRole(String id, Roles role) {

@@ -10,17 +10,17 @@ public class Employee {
 	private String dept;
 	private String email;
 	private String phnNo;
-	private Set<Roles> role;
+	private Set<Roles> roles;
 	private String password;
 
 
 
-	public Employee(String name, String dept, String email, String phnNo, Set<Roles> role, String password) {
+	public Employee(String name, String dept, String email, String phnNo, Set<Roles> roles, String password) {
 		this.name = name;
 		this.dept = dept;
 		this.email = email;
 		this.phnNo = phnNo;
-		this.role = role;
+		this.roles = roles;
 		this.password = password;
 	}
 
@@ -33,6 +33,7 @@ public class Employee {
 
 	}
 	public Employee(String id,String phnNo,String email) {
+		this.id=id;
 		this.phnNo=phnNo;
 		this.email=email;
 	}
@@ -58,7 +59,7 @@ public class Employee {
 	}
 
 	public Set<Roles> getRole() {
-		return role;
+		return roles;
 	}
 
 	public String getPassword() {
@@ -85,8 +86,8 @@ public class Employee {
 		this.phnNo = phnNo;
 	}
 
-	public void setRole(Set<Roles> role) {
-		this.role = role;
+	public void setRole(Set<Roles> roles) {
+		this.roles = roles;
 	}
 
 	public void setPassword(String password) {

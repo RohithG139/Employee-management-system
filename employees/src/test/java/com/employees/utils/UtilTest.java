@@ -6,7 +6,12 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
+
+import com.employees.enums.Roles;
 
 class UtilTest {
 
@@ -67,7 +72,7 @@ class UtilTest {
 
 	@Test
 	void validateRole_invalidRole_shouldReturnFalse() {
-		assertFalse(Util.validateRole("MAN"));
+		assertFalse(Util.validateRole("ADMIN1"));
 	}
 
 	@Test
