@@ -11,18 +11,21 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.employees.enums.Roles;
-import com.employees.exceptions.ValidationException;
 
 public class Util {
 	private static final String EMP_ID_REGEX = "TEK[0-9]+";
-
+	private static final String PREFIX = "TEK";
+	
 	public static boolean validId(String id) {
 		return id != null && id.matches(EMP_ID_REGEX);
 	}
 
 	public static boolean validateEmail(String email) {
-		Pattern emailPattern = Pattern.compile("^[A-Za-z09.]+@[A-Za-z0-9]+\\.[A-za-z]{2,}$");
+		Pattern emailPattern = Pattern.compile("^[A-Za-z0-9.]+@[A-Za-z0-9]+\\.[A-za-z]{2,}$");
 		Matcher matcher = emailPattern.matcher(email);
 		if (!matcher.matches()) {
 			return false;
@@ -56,7 +59,9 @@ public class Util {
 	}
 
 	public static boolean validatePassword(String password) {
-		if (password != null && password.trim().isEmpty()) {
+		Pattern passwordPattern=Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+=]).{8,}$");
+		Matcher matcher=passwordPattern.matcher(password);
+		if (!matcher.matches()) {
 			return false;
 		}
 		return true;
@@ -91,7 +96,7 @@ public class Util {
 	}
 
 	public static String generatePassword() {
-		return UUID.randomUUID().toString().substring(0, 6);
+		return UUID.randomUUID().toString().substring(0, 8);
 	}
 
 	public static Connection getConnection() {
@@ -119,4 +124,22 @@ public class Util {
 		}
 		return null;
 	}
+	
+	
+
+	    public static String generateId(JSONArray employees) {
+
+	        if (employees == null || employees.isEmpty()) {
+	            return PREFIX + "1";
+	        }
+
+	        JSONObject last = (JSONObject) employees.get(employees.size() - 1);
+	        String lastId = (String) last.get("id");
+
+	        int num = 1;
+	        if (lastId != null && lastId.startsWith(PREFIX)) {
+	            num = Integer.parseInt(lastId.substring(PREFIX.length())) + 1;
+	        }
+	        return PREFIX + num;
+	    }
 }

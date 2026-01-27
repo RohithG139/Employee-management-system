@@ -1,12 +1,13 @@
 package com.employees.controller;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import com.employees.dao.EmployeeDao;
 import com.employees.enums.Roles;
 import com.employees.exceptions.AuthorizedException;
+import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ServiceException;
 import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
@@ -48,10 +49,10 @@ public class EmployeeController {
 			addEmployee.insert(dao, employee, role);
 			System.out.println("Employee added succesfully");
 			System.out.println("Your temporary password:" + password);
-		} catch (IllegalArgumentException e) {
-			System.out.println("error while insert role:" + e.getMessage());
 		} catch (ValidationException e) {
 			System.out.println("error while insert employee:" + e.getMessage());
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
 		}
 
 	}
@@ -64,6 +65,10 @@ public class EmployeeController {
 			System.out.println("Employee deleted succesfully");
 		} catch (ValidationException e) {
 			System.out.println("error while delete employee:" + e.getMessage());
+		} catch (EmployeeNotFoundException e) {
+			System.out.println(e.getMessage());
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 
@@ -79,11 +84,13 @@ public class EmployeeController {
 
 			try {
 				updateEmployee.update(dao, employee, user);
-				System.out.println("Employee updated own data succesfully");
+				System.out.println("Employee updated their own data succesfully");
 			} catch (ValidationException e) {
 				System.out.println("error while updating their own details:" + e.getMessage());
 			} catch (AuthorizedException e) {
 				System.out.println("Authorized error:" + e.getMessage());
+			}  catch (ServiceException e) {
+				System.out.println(e.getMessage());
 			}
 		} else {
 			System.out.println("Enter Id to update:");
@@ -101,28 +108,57 @@ public class EmployeeController {
 			try {
 				updateEmployee.update(dao, employee, user);
 				System.out.println("Employee updated succesfully");
-			} catch (IllegalArgumentException e) {
-				System.out.println("error while updating role:" + e.getMessage());
 			} catch (ValidationException e) {
 				System.out.println("error while updating details:" + e.getMessage());
+			} catch (EmployeeNotFoundException e) {
+				System.out.println(e.getMessage());
+			} catch (ServiceException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 	}
 
 	public void fetchAll(EmployeeDao dao) {
-		fetchEmployee.fetchAll(dao);
+		try {
+			List<Employee> employees = fetchEmployee.fetchAll(dao);
+			for (Employee employee : employees) {
+				System.out.println(employee.toString());
+			}
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
 	public void fetchById(EmployeeDao dao) {
-		System.out.println("Enter Employee id:");
-		String id = sc.next().toUpperCase();
-		try {
-			fetchEmployee.fetchById(dao, id, Menu.currentUser);
-		} catch (ValidationException e) {
-			System.out.println("error while fetching details:" + e.getMessage());
-		} catch (AuthorizedException e) {
-			System.out.println("Authorized error:" + e.getMessage());
+		
+		LoginResult user = Menu.currentUser;
+		if (user.getRoles().size() == 1 && user.getRoles().contains(Roles.EMPLOYEE)) {
+			try {
+				Employee employee = fetchEmployee.fetchById(dao,user.getEmpId(), user);
+				System.out.println(employee.toString());
+			} catch (ValidationException e) {
+				System.out.println("error while fetching details:" + e.getMessage());
+			} catch (AuthorizedException e) {
+				System.out.println("Authorized error:" + e.getMessage());
+			} catch (ServiceException e) {
+				System.out.println(e.getMessage());
+			}
+		}else {
+			System.out.println("Enter Employee id:");
+			String id = sc.next().toUpperCase();
+			try {
+				Employee employee = fetchEmployee.fetchById(dao, id, user);
+				System.out.println(employee.toString());
+			} catch (ValidationException e) {
+				System.out.println("error while fetching details:" + e.getMessage());
+			} catch (AuthorizedException e) {
+				System.out.println("Authorized error:" + e.getMessage());
+			} catch (ServiceException e) {
+				System.out.println(e.getMessage());
+			}catch (EmployeeNotFoundException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 
@@ -133,11 +169,14 @@ public class EmployeeController {
 		String role = sc.next().toUpperCase();
 		try {
 			updateRoles.assignRole(dao, id, role);
+			System.out.println("role assigned succesfully");
 		} catch (ValidationException e) {
 			System.out.println("error while assign role:" + e.getMessage());
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
 		}
 	}
-
+	
 	public void revokeRole(EmployeeDao dao) {
 		System.out.println("Enter Id:");
 		String id = sc.next().toUpperCase();
@@ -145,8 +184,11 @@ public class EmployeeController {
 		String role = sc.next().toUpperCase();
 		try {
 			updateRoles.revokeRole(dao, id, role);
+			System.out.println("role revoked succesfully");
 		} catch (ValidationException e) {
 			System.out.println("error while revoke role:" + e.getMessage());
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 }

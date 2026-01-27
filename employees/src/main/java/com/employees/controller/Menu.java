@@ -8,13 +8,6 @@ import com.employees.enums.Operations;
 import com.employees.enums.RolePermission;
 import com.employees.enums.Roles;
 import com.employees.model.LoginResult;
-import com.employees.services.AddEmployeeService;
-import com.employees.services.DeleteEmployeeService;
-import com.employees.services.FetchEmployeeService;
-import com.employees.services.LoginValidator;
-import com.employees.services.PasswordOperations;
-import com.employees.services.UpdateEmployeeService;
-import com.employees.services.UpdateRolesService;
 
 public class Menu {
 
@@ -29,11 +22,8 @@ public class Menu {
 		LoginController loginController = new LoginController();
 
 		LoginResult login = loginController.validateUser(dao);
-		if (login == null)
-			return;
 		Set<Roles> roles = login.getRoles();
 		Menu.currentUser = login; // currently who are logged in
-
 		while (true) {
 			for (Operations operation : Operations.values()) {
 				if (rolePermission.hasAccess(roles, operation)) {
@@ -47,52 +37,58 @@ public class Menu {
 				choice = Operations.valueOf(input);
 			} catch (IllegalArgumentException e) {
 				System.out.println("Invalid menu option");
+				continue;
 			}
 			if (!rolePermission.hasAccess(roles, choice)) {
 				System.out.println("Access denied...");
+				continue;
 			}
 
-			if (rolePermission.hasAccess(roles, choice)) {
-				if (choice == Operations.ADD) {
+			switch (choice) {
 
-					controller.addEmployee(dao);
-				}
-				if (choice == Operations.UPDATE) {
+			case ADD:
+				controller.addEmployee(dao);
+				break;
 
-					controller.updateEmployee(dao);
-				}
-				if (choice == Operations.DELETE) {
-					controller.deleteEmployee(dao);
+			case UPDATE:
+				controller.updateEmployee(dao);
+				break;
 
-				}
-				if (choice == Operations.FETCH) {
+			case DELETE:
+				controller.deleteEmployee(dao);
+				break;
 
-					controller.fetchAll(dao);
-				}
-				if (choice == Operations.FETCH_EMPLOYEE_BY_ID) {
+			case FETCH:
+				controller.fetchAll(dao);
+				break;
 
-					controller.fetchById(dao);
-				}
-				if (choice == Operations.RESETPASSWORD) {
+			case FETCH_EMPLOYEE_BY_ID:
+				controller.fetchById(dao);
+				break;
 
-					loginController.resetPassword(dao);
-				}
-				if (choice == Operations.CHANGEPASSWORD) {
+			case RESETPASSWORD:
+				loginController.resetPassword(dao);
+				break;
 
-					loginController.changePassword(dao);
-				}
-				if (choice == Operations.ASSIGNROLE) {
+			case CHANGEPASSWORD:
+				loginController.changePassword(dao);
+				break;
 
-					controller.assignRole(dao);
-				}
-				if (choice == Operations.REVOKEROLE) {
+			case ASSIGNROLE:
+				controller.assignRole(dao);
+				break;
 
-					controller.revokeRole(dao);
-				}
-				if (choice == Operations.EXIT) {
-					System.out.println("EXIT...");
-					System.exit(0);
-				}
+			case REVOKEROLE:
+				controller.revokeRole(dao);
+				break;
+
+			case EXIT:
+				System.out.println("EXIT...");
+				System.exit(0);
+				break;
+				
+			default:
+				System.out.println("Invalid operation");
 			}
 
 		}

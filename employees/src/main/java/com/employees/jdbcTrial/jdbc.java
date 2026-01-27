@@ -18,7 +18,7 @@ public class jdbc {
 	public static void jdbc() {
 		Properties property=new Properties();
 		Scanner sc=new Scanner(System.in);
-		try(InputStream input=new FileInputStream("src/main/resources/Appilcation.properties")){
+		try(InputStream input=new FileInputStream("src/main/resources/Appilication.properties")){
 			property.load(input);
 			
 			String url=property.getProperty("db.url");

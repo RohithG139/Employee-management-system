@@ -9,16 +9,9 @@ public class LoginValidator {
 	public LoginResult login(EmployeeDao dao,String id,String password){
 
 		
-			if(!Util.validId(id)) {
-				throw new ValidationException("Invalid id");
-			}
-			
-			if(!Util.validatePassword(password)) {
-				throw new ValidationException("Invalid password");
-			}
 			LoginResult login=dao.validateUser(id, Util.hashPassword(password));
 			if(login==null) {
-				throw new ValidationException("Invalid credentials,please enter valid credentials");
+				throw new ValidationException("Incorrect username or password");
 			}
 
 			return login;

@@ -15,7 +15,7 @@ public class LoginController {
 	LoginValidator validator = new LoginValidator();
 
 	public LoginResult validateUser(EmployeeDao dao) {
-		LoginResult loggedInUser = null;
+
 		while (true) {
 			System.out.println("Enter id:");
 			String id = sc.next().toUpperCase();
@@ -23,14 +23,13 @@ public class LoginController {
 			String password = sc.next();
 
 			try {
-				loggedInUser = validator.login(dao, id, password);
+				LoginResult loggedInUser = validator.login(dao, id, password);
 				System.out.println("Employee login succesfully");
 				return loggedInUser;
 			} catch (ValidationException e) {
 				System.out.println("error during login:" + e.getMessage());
 			}
 		}
-		
 
 	}
 

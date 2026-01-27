@@ -46,7 +46,7 @@ class LoginValidatorTest {
 		
 		ValidationException exception=assertThrows(ValidationException.class,()->login.login(employeeDao, "TEK1","pass"));
 		
-		assertEquals("Invalid credentials,please enter valid credentials",exception.getMessage());
+		assertEquals("Incorrect username or password",exception.getMessage());
 		verify(employeeDao).validateUser("TEK1",Util.hashPassword("pass"));
 	}
 	

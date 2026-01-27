@@ -23,14 +23,23 @@ public class Employee {
 		this.roles = roles;
 		this.password = password;
 	}
-
+	
+	public Employee(String id,String name, String dept, String email, String phnNo, Set<Roles> roles) {
+		this.id=id;
+		this.name = name;
+		this.dept = dept;
+		this.email = email;
+		this.phnNo = phnNo;
+		this.roles = roles;
+		
+	}
+	
 	public Employee(String id,String name, String dept, String email, String phnNo) {
 		this.id=id;
 		this.name = name;
 		this.dept = dept;
 		this.email = email;
 		this.phnNo = phnNo;
-
 	}
 	public Employee(String id,String phnNo,String email) {
 		this.id=id;
@@ -92,6 +101,12 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String toString() {
+		return "ID:" + id + "|  Name: " + name + "  |  " + "  Department: "
+				+ dept + "  |  Email: " + email + "  |  Role: " + roles
+				+ "  |  PhnNo : " + phnNo;
 	}
 
 }

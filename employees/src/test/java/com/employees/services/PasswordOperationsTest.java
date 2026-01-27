@@ -45,25 +45,25 @@ class PasswordOperationsTest {
 		verify(employeeDao,never()).resetPassword(eq("TEK1"),anyString());
 	}
 	
-	
 	@Test
 	public void changePassword_validId_shouldCallDao() {
 		when(employeeDao.changePassword(eq("TEK1"),anyString())).thenReturn(true);
-		assertDoesNotThrow(()->operations.changePasswordService(employeeDao,"TEK1","pass"));
+		assertDoesNotThrow(()->operations.changePasswordService(employeeDao,"TEK1","Pass@123"));
 		verify(employeeDao).changePassword(eq("TEK1"), anyString());
 	}
 	
 	@Test
 	public void changePassword_InvalidId_shouldCallDao() {
 		
-		assertThrows(ValidationException.class,()->operations.changePasswordService(employeeDao,"xyz1","pass"));
+		assertThrows(ValidationException.class,()->operations.changePasswordService(employeeDao,"xyz1","Pass@123"));
+		verify(employeeDao,never()).changePassword(anyString(), anyString());
 	}
 	
 	@Test
 	public void changePassword_InvalidPassword_shouldCallDao() {
 		
-		assertThrows(ValidationException.class,()->operations.changePasswordService(employeeDao,"xyz1",""));
-		
+		assertThrows(ValidationException.class,()->operations.changePasswordService(employeeDao,"xyz1","pass"));
+		verify(employeeDao,never()).changePassword(anyString(), anyString());
 	}
 	
 

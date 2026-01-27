@@ -49,7 +49,7 @@ class AddEmployeeServiceTest {
 			Employee emp=new Employee(
 					"Rohith","dev","rohith@gmail.com","8788222382",null,"hashedPWD");
 			
-			IllegalArgumentException exception=assertThrows(IllegalArgumentException.class,()->add.insert(employeeDao, emp,"ADMIN1"));
+			ValidationException exception=assertThrows(ValidationException.class,()->add.insert(employeeDao, emp,"ADMIN1"));
 			
 			assertEquals("Invalid role",exception.getMessage());
 	}

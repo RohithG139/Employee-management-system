@@ -1,5 +1,7 @@
 package com.employees.dao;
 
+import java.util.List;
+
 import com.employees.enums.Roles;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
@@ -7,21 +9,21 @@ import com.employees.model.LoginResult;
 public interface EmployeeDao {
 	void addEmployee(Employee e);
 
-	void fetchEmployee();
+	List<Employee> fetchEmployee();
 
-	void fetchEmployeeById(String id);
+	Employee fetchEmployeeById(String id);
 
-	void deleteEmployee(String id);
+	boolean deleteEmployee(String id);
 
-	void updateEmployee(Employee emp, Roles role);
+	boolean updateEmployee(Employee emp, Roles role);
 
 	boolean resetPassword(String id, String password);
 
 	boolean changePassword(String id, String password);
 	
-	void assignRole(String id,Roles role);
+	boolean assignRole(String id,Roles role);
 	
-	void revokeRole(String id,Roles role);
+	boolean revokeRole(String id,Roles role);
 	
 	LoginResult validateUser(String id, String password);
 }
