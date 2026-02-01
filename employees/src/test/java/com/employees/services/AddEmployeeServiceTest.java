@@ -21,7 +21,7 @@ class AddEmployeeServiceTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private AddEmployeeService add;
+	private EmployeeService add;
 	
 	@Test
 	public void addEmployee_validEmployee_shouldReturnDao() {

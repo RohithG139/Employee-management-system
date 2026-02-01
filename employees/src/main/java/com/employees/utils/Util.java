@@ -25,6 +25,9 @@ public class Util {
 	}
 
 	public static boolean validateEmail(String email) {
+		if ( email!= null && email.trim().isEmpty()) {
+			return false;
+		}
 		Pattern emailPattern = Pattern.compile("^[A-Za-z0-9.]+@[A-Za-z0-9]+\\.[A-za-z]{2,}$");
 		Matcher matcher = emailPattern.matcher(email);
 		if (!matcher.matches()) {

@@ -205,7 +205,7 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 			if (employee.get("id").equals(id)) {
 				JSONArray roles = (JSONArray) employee.get("role");
 				if (roles.contains(role.toString())) {
-					throw new DataAccessException("Duplicate role entry for assigning role");
+					return false;
 				}
 				roles.add(role.toString());
 				writeDataToJson(employees);
@@ -223,7 +223,8 @@ public class FileEmployeeDaoImpl implements EmployeeDao {
 			if (employee.get("id").equals(id)) {
 				JSONArray rolesArray = (JSONArray) employee.get("role");
 				if (!rolesArray.contains(role.toString())) {
-					throw new DataAccessException("role doesnt exists for revoking role");
+//					throw new DataAccessException("role doesnt exists for revoking role");
+					return false;
 				}
 				rolesArray.remove(role.toString());
 				writeDataToJson(employees);

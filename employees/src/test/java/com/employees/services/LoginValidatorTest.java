@@ -26,7 +26,7 @@ class LoginValidatorTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private LoginValidator login;
+	private LoginService login;
 
 	@Test
 	public void loginSuccess() {

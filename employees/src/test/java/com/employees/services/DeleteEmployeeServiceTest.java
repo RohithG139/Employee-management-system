@@ -25,7 +25,7 @@ class DeleteEmployeeServiceTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private DeleteEmployeeService delEmployee;
+	private EmployeeService delEmployee;
 	
 	@Test
 	public void deleteEmployee_validId_shouldCallDao() {

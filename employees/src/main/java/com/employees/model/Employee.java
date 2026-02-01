@@ -41,10 +41,11 @@ public class Employee {
 		this.email = email;
 		this.phnNo = phnNo;
 	}
-	public Employee(String id,String phnNo,String email) {
+	public Employee(String id,String email,String phnNo) {
 		this.id=id;
-		this.phnNo=phnNo;
 		this.email=email;
+		this.phnNo=phnNo;
+		
 	}
 
 	public String getId() {

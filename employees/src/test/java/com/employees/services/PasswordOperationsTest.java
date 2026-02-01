@@ -26,7 +26,7 @@ class PasswordOperationsTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private PasswordOperations operations;
+	private LoginService operations;
 	
 	@Test
 	public void resetPassword_validId_shouldReturnPassword() {

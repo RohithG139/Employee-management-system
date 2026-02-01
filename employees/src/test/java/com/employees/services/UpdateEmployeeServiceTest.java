@@ -30,14 +30,14 @@ class UpdateEmployeeServiceTest {
 	private EmployeeDao employeeDao;
 
 	@InjectMocks
-	private UpdateEmployeeService updateEmp;
+	private EmployeeService updateEmp;
 
 	@Test
 	public void empUpdate_updateOwnData_shouldCallDao() {
 		Set<Roles> roles = new HashSet<>();
 		roles.add(Roles.EMPLOYEE);
 		LoginResult login = new LoginResult("TEK1", roles);
-		Employee emp = new Employee("TEK1", "8765432123", "rohith@gmail.com");
+		Employee emp = new Employee("TEK1", "rohith@gmail.com", "8765672722");
 
 		updateEmp.update(employeeDao, emp, login);
 		verify(employeeDao).updateEmployee(emp, Roles.EMPLOYEE);

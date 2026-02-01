@@ -21,7 +21,7 @@ class UpdateRolesServiceTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private UpdateRolesService updateRole;
+	private EmployeeService updateRole;
 	
 	@Test
 	public void updateRoles_validId_doesNotThrowsException() {

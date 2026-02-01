@@ -1,0 +1,96 @@
+2026-01-28 14:40:31,964 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 14:41:36,665 INFO  com.employees.services.FetchEmployeeService - fetch all employees request recieved
+2026-01-28 14:41:36,669 INFO  com.employees.services.FetchEmployeeService - fetch all the employees successfully
+2026-01-28 14:42:45,947 INFO  com.employees.services.AddEmployeeService - add employee request recieved for name mounish
+2026-01-28 14:42:45,948 WARN  com.employees.services.AddEmployeeService - validation failed: invalid role for name mounish
+2026-01-28 14:43:28,984 INFO  com.employees.services.AddEmployeeService - add employee request recieved for name mounish
+2026-01-28 14:43:28,989 INFO  com.employees.services.AddEmployeeService - employee added succesfully with name mounish
+2026-01-28 14:46:52,909 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 14:47:08,013 INFO  com.employees.services.UpdateRolesService - assign role EMPLOYEE request recieved for id TEK11 
+2026-01-28 14:47:08,017 ERROR com.employees.services.UpdateRolesService - Database error while assign the role for id TEK11 
+com.employees.exceptions.DataAccessException: Duplicate role entry for assigning role
+	at com.employees.dao.FileEmployeeDaoImpl.assignRole(FileEmployeeDaoImpl.java:208)
+	at com.employees.services.UpdateRolesService.assignRole(UpdateRolesService.java:26)
+	at com.employees.controller.EmployeeController.assignRole(EmployeeController.java:171)
+	at com.employees.controller.Menu.showMenu(Menu.java:78)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:25)
+2026-01-28 14:54:51,582 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 14:55:09,625 INFO  com.employees.services.UpdateRolesService - assign role MANAGER request recieved for id TEK1 
+2026-01-28 14:55:09,630 INFO  com.employees.services.UpdateRolesService - assign role MANAGER succesfully to id TEK1 
+2026-01-28 14:55:23,063 INFO  com.employees.services.UpdateRolesService - revoke role EMPLOYEE request recieved for id TEK1 
+2026-01-28 14:55:23,084 WARN  com.employees.services.UpdateRolesService - role EMPLOYEE doesn't assigned for id TEK1 
+2026-01-28 14:56:08,545 INFO  com.employees.services.UpdateRolesService - revoke role MANAGER request recieved for id TEK1 
+2026-01-28 14:56:08,549 INFO  com.employees.services.UpdateRolesService - revoke role MANAGER succesfully to id TEK1 
+2026-01-28 14:56:24,486 INFO  com.employees.services.UpdateRolesService - assign role MANAGER request recieved for id TEK11 
+2026-01-28 14:56:24,489 WARN  com.employees.services.UpdateRolesService - duplicate role MANAGER is assigned for id TEK11 
+2026-01-28 14:57:07,923 INFO  com.employees.services.FetchEmployeeService - fetch the employee request recieved for id TEK11 
+2026-01-28 14:57:07,925 INFO  com.employees.services.FetchEmployeeService - fetch the employee successfully with id TEK11
+2026-01-28 15:00:05,102 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 15:00:57,551 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK11 
+2026-01-28 15:01:37,290 INFO  com.employees.services.LoginValidator - login request recieved for id TEK11 
+2026-01-28 15:02:04,564 INFO  com.employees.services.PasswordOperations - change password request recieved for id TEK11 
+2026-01-28 15:02:04,565 WARN  com.employees.services.PasswordOperations - validation failed: invalid password for id TEK11
+2026-01-28 15:02:19,752 INFO  com.employees.services.PasswordOperations - change password request recieved for id TEK11 
+2026-01-28 15:02:19,757 INFO  com.employees.services.PasswordOperations - change password successfully for id TEK11 
+2026-01-28 15:04:51,813 INFO  com.employees.services.LoginValidator - login request recieved for id TEK10 
+2026-01-28 15:05:26,751 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:05:26,753 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK10
+2026-01-28 15:06:10,717 INFO  com.employees.services.FetchEmployeeService - fetch the employee request recieved for id TEK10 
+2026-01-28 15:06:10,719 INFO  com.employees.services.FetchEmployeeService - fetch the employee successfully with id TEK10
+2026-01-28 15:06:37,483 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:06:37,483 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK10
+2026-01-28 15:13:52,396 INFO  com.employees.services.LoginValidator - login request recieved for id TEK11 
+2026-01-28 15:14:24,733 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:14:28,675 INFO  com.employees.services.FetchEmployeeService - fetch all employees request recieved
+2026-01-28 15:14:28,697 INFO  com.employees.services.FetchEmployeeService - fetch all the employees successfully
+2026-01-28 15:14:52,130 INFO  com.employees.services.LoginValidator - login request recieved for id TEK10 
+2026-01-28 15:15:18,715 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:15:18,716 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK10
+2026-01-28 15:23:09,760 INFO  com.employees.services.LoginValidator - login request recieved for id TEK10 
+2026-01-28 15:23:39,162 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:23:39,162 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK10
+2026-01-28 15:25:31,931 INFO  com.employees.services.LoginValidator - login request recieved for id TEK10 
+2026-01-28 15:25:49,212 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK10 
+2026-01-28 15:25:49,213 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK10
+2026-01-28 15:26:25,258 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 15:26:32,974 INFO  com.employees.services.FetchEmployeeService - fetch all employees request recieved
+2026-01-28 15:26:32,977 INFO  com.employees.services.FetchEmployeeService - fetch all the employees successfully
+2026-01-28 15:27:17,194 INFO  com.employees.services.LoginValidator - login request recieved for id TEK4 
+2026-01-28 15:27:17,226 WARN  com.employees.services.LoginValidator - Login failure for id TEK4
+2026-01-28 15:27:34,757 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-28 15:27:37,411 INFO  com.employees.services.FetchEmployeeService - fetch all employees request recieved
+2026-01-28 15:27:37,414 INFO  com.employees.services.FetchEmployeeService - fetch all the employees successfully
+2026-01-28 15:27:54,039 INFO  com.employees.services.PasswordOperations - reset password request recieved for id TEK4 
+2026-01-28 15:27:54,077 INFO  com.employees.services.PasswordOperations - reset password successfully for id TEK4 
+2026-01-28 15:28:13,581 INFO  com.employees.services.LoginValidator - login request recieved for id TEK4 
+2026-01-28 15:28:35,924 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK4 
+2026-01-28 15:28:35,924 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK4
+2026-01-28 15:28:59,590 INFO  com.employees.services.PasswordOperations - change password request recieved for id TEK4 
+2026-01-28 15:28:59,597 INFO  com.employees.services.PasswordOperations - change password successfully for id TEK4 
+2026-01-28 15:31:16,697 INFO  com.employees.services.LoginValidator - login request recieved for id TEK4 
+2026-01-28 15:31:31,372 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK4 
+2026-01-28 15:31:31,374 WARN  com.employees.services.UpdateEmployeeService - email 8767362271 for id TEK4
+2026-01-28 15:31:31,374 WARN  com.employees.services.UpdateEmployeeService - validation failed: invalid email for id TEK4
+2026-01-28 15:32:58,490 INFO  com.employees.services.LoginValidator - login request recieved for id TEK4 
+2026-01-28 15:33:13,156 INFO  com.employees.services.UpdateEmployeeService - update employee request recieved for id TEK4 
+2026-01-28 15:33:13,157 WARN  com.employees.services.UpdateEmployeeService - email uday@gmail.com for id TEK4
+2026-01-28 15:33:13,162 INFO  com.employees.services.UpdateEmployeeService - update employee successfully for id TEK4 
+2026-01-29 11:25:05,098 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-29 11:25:13,275 INFO  com.employees.services.FetchEmployeeService - fetch all employees request recieved
+2026-01-29 11:25:13,456 INFO  com.employees.services.FetchEmployeeService - fetch all the employees successfully
+2026-01-29 11:25:53,257 INFO  com.employees.services.UpdateRolesService - assign role EMPLOYEE request recieved for id TEK11 
+2026-01-29 11:25:53,359 ERROR com.employees.services.UpdateRolesService - Database error while assign the role for id TEK11 
+com.employees.exceptions.DataAccessException: DB error while assign role org.postgresql.util.PSQLException: ERROR: insert or update on table "emp_roles" violates foreign key constraint "f_key"
+  Detail: Key (emp_id)=(TEK11) is not present in table "employees".
+	at com.employees.dao.JdbcEmployeeDaoImpl.assignRole(JdbcEmployeeDaoImpl.java:272)
+	at com.employees.services.UpdateRolesService.assignRole(UpdateRolesService.java:26)
+	at com.employees.controller.EmployeeController.assignRole(EmployeeController.java:171)
+	at com.employees.controller.Menu.showMenu(Menu.java:78)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:28)
+2026-01-29 11:28:19,687 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-29 11:28:28,387 INFO  com.employees.services.UpdateRolesService - assign role EMPLOYEE request recieved for id TEK11 
+2026-01-29 11:28:28,476 ERROR com.employees.services.UpdateRolesService - Database error while assign the role for id TEK11 
+2026-01-29 15:01:55,261 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-29 15:01:55,268 WARN  com.employees.services.LoginValidator - Login failure for id TEK1
+2026-01-29 15:01:55,295 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 
+2026-01-29 15:02:26,503 INFO  com.employees.services.LoginValidator - login request recieved for id TEK1 

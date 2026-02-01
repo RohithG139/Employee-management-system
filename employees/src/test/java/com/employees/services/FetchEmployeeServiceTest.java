@@ -28,7 +28,7 @@ class FetchEmployeeServiceTest {
 	private EmployeeDao employeeDao;
 	
 	@InjectMocks
-	private FetchEmployeeService fetchEmp;
+	private EmployeeService fetchEmp;
 	
 	@Test
 	public void employeeFetchOwnData_shouldCallDao(){
