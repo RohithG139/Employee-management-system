@@ -12,7 +12,6 @@ import com.employees.model.LoginResult;
 public class Menu {
 
 	public static LoginResult currentUser;
-
 	public static void showMenu(EmployeeDao dao) {
 
 		Scanner sc = new Scanner(System.in);
@@ -23,7 +22,7 @@ public class Menu {
 
 		LoginResult login = loginController.validateUser(dao);
 		Set<Roles> roles = login.getRoles();
-		Menu.currentUser = login; // currently who are logged in
+		Menu.currentUser = login;     // currently who are logged in
 		while (true) {
 			for (Operations operation : Operations.values()) {
 				if (rolePermission.hasAccess(roles, operation)) {
@@ -81,7 +80,15 @@ public class Menu {
 			case REVOKEROLE:
 				controller.revokeRole(dao);
 				break;
-
+				
+			case FETCH_INACTIVE_EMPLOYEES:
+				controller.fetchInActiveEmployees(dao);
+				break;
+				
+			case LOGOUT:
+				System.out.println("logout succesfully");
+				return;
+				
 			case EXIT:
 				System.out.println("EXIT...");
 				System.exit(0);

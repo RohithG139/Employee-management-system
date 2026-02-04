@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -30,7 +31,7 @@ class PasswordOperationsTest {
 	
 	@Test
 	public void resetPassword_validId_shouldReturnPassword() {
-		when(employeeDao.resetPassword(eq("TEK1"),anyString())).thenReturn(true);
+		
 		String password=operations.resetPasswordService(employeeDao,"TEK1");
 		assertNotNull(password);
 		verify(employeeDao).resetPassword(eq("TEK1"),anyString());
@@ -38,7 +39,7 @@ class PasswordOperationsTest {
 	
 	@Test
 	public void resetPassword_IdNotFound_shouldThrowsException() {
-		when(employeeDao.resetPassword(anyString(), anyString())).thenReturn(false);
+		doThrow(new EmployeeNotFoundException("employee not found")).when(employeeDao).resetPassword(anyString(),anyString());
 		EmployeeNotFoundException exception = assertThrows(EmployeeNotFoundException.class,
 				()->operations.resetPasswordService(employeeDao, "TEK9"));
 		assertEquals("employee not found",exception.getMessage());
@@ -47,7 +48,7 @@ class PasswordOperationsTest {
 	
 	@Test
 	public void changePassword_validId_shouldCallDao() {
-		when(employeeDao.changePassword(eq("TEK1"),anyString())).thenReturn(true);
+		
 		assertDoesNotThrow(()->operations.changePasswordService(employeeDao,"TEK1","Pass@123"));
 		verify(employeeDao).changePassword(eq("TEK1"), anyString());
 	}

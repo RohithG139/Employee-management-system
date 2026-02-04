@@ -65,15 +65,13 @@ public class EmployeeService {
 			throw new ValidationException("Invalid id");
 		}
 		try {
-		boolean result=dao.deleteEmployee(id);
-		if(!result) {
-			logger.warn("employee not found with id {} ",id);
-			throw new EmployeeNotFoundException("employee not found");
-		}
+		dao.deleteEmployee(id);
 		logger.info("Employee deleted succesfully for employee id {}",id);
 		}catch(DataAccessException e) {
 			logger.error("Database error during delete employee with id {} ",id,e);
 			throw new ServiceException("unable to delete employee:"+e.getMessage());
+		}catch(EmployeeNotFoundException e) {
+			throw e;
 		}
 	}
 	
@@ -175,15 +173,13 @@ public class EmployeeService {
 				throw new ValidationException("Invalid phnNo");
 			}
 			try {
-				boolean result = dao.updateEmployee(employee, Roles.ADMIN);
-				if (!result) {
-					logger.warn("employee not found with id {} ",employee.getId());
-					throw new EmployeeNotFoundException("employee not found");
-				}
+				 dao.updateEmployee(employee, Roles.ADMIN);
 
 			} catch (DataAccessException e) {
 				logger.error("Database error while update the employee for id {} ",employee.getId(),e);
 				throw new ServiceException("unable to update employee:" + e.getMessage());
+			}catch(EmployeeNotFoundException e) {
+				throw e;
 			}
 
 		}
@@ -200,16 +196,13 @@ public class EmployeeService {
 			throw new ValidationException("Invalid role");
 		}
 		try {
-			boolean result = dao.assignRole(id, Roles.valueOf(role));
-
-			if (!result) {
-				logger.warn("duplicate role {} is assigned for id {} ",role,id);
-				throw new ValidationException("duplicate role assigned");
-			}
+			dao.assignRole(id, Roles.valueOf(role));
 			logger.info("assign role {} succesfully to id {} ",role,id);
 		} catch (DataAccessException e) {
 			logger.error("Database error while assign the role for id {} ",id,e.getMessage());
-			throw new ServiceException("unable to assign role:"+e.getMessage());
+			throw new ServiceException("unable to assign role:"+e);
+		}catch (EmployeeNotFoundException | ValidationException e) {
+	        throw e;
 		}
 	}
 
@@ -224,17 +217,28 @@ public class EmployeeService {
 			throw new ValidationException("Invalid role");
 		}
 		try {
-			boolean result = dao.revokeRole(id, Roles.valueOf(role));
+			dao.revokeRole(id, Roles.valueOf(role));
 
-			if (!result) {
-				logger.warn("role {} doesn't assigned for id {} ",role,id);
-				throw new ValidationException("role doesnt assigned");
-			}
 			logger.info("revoke role {} succesfully to id {} ",role,id);
 		} catch (DataAccessException e) {
 			logger.error("Database error while revoke the role for id {} ",id,e);
 			throw new ServiceException("unable to revoke role:"+e.getMessage());
+		}catch (EmployeeNotFoundException | ValidationException e) {
+	        throw e;
 		}
 		
+	}
+	
+	public List<Employee> fetchInActiveEmployees(EmployeeDao dao) {
+		logger.info("fetch InActive employees request recieved");
+		List<Employee> employees=new ArrayList<>();
+		try {
+			employees=dao.fetchInActiveEmployees();
+			logger.info("fetch inactive employees successfully");
+		}catch (DataAccessException e) {
+			logger.error("Database error while fetch employees",e);
+			throw new ServiceException("unable to fetch employee:"+e.getMessage());
+		}
+		return employees;
 	}
 }

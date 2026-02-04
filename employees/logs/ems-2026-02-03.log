@@ -1,0 +1,239 @@
+2026-02-03 12:28:25,513 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 12:28:29,319 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 12:28:29,332 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 12:29:11,202 INFO  com.employees.services.EmployeeService - assign role MANAGER request recieved for id TEK11 
+2026-02-03 12:29:11,204 WARN  com.employees.services.EmployeeService - duplicate role MANAGER is assigned for id TEK11 
+2026-02-03 12:30:06,240 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK100
+2026-02-03 12:30:06,255 WARN  com.employees.services.EmployeeService - employee not found with id TEK100 
+2026-02-03 12:30:34,515 INFO  com.employees.services.EmployeeService - revoke role EMPLOYEE request recieved for id TEK11 
+2026-02-03 12:30:34,519 INFO  com.employees.services.EmployeeService - revoke role EMPLOYEE succesfully to id TEK11 
+2026-02-03 12:30:44,418 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 12:30:44,439 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 12:31:03,144 INFO  com.employees.services.EmployeeService - revoke role EMPLOYEE request recieved for id TEK11 
+2026-02-03 12:31:03,146 WARN  com.employees.services.EmployeeService - role EMPLOYEE doesn't assigned for id TEK11 
+2026-02-03 12:31:52,063 INFO  com.employees.services.EmployeeService - update employee request recieved for id 2321 
+2026-02-03 12:31:52,063 WARN  com.employees.services.EmployeeService - validation failed: invalid id for 2321
+2026-02-03 12:32:54,122 INFO  com.employees.services.LoginService - login request recieved for id TEK 
+2026-02-03 12:32:54,153 WARN  com.employees.services.LoginService - Login failure for id TEK
+2026-02-03 12:33:00,502 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 12:33:25,752 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 12:33:28,890 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 12:33:28,965 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 12:33:59,206 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 12:33:59,300 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK10 
+2026-02-03 12:34:25,917 INFO  com.employees.services.EmployeeService - assign role WED request recieved for id TEK11 
+2026-02-03 12:34:25,917 WARN  com.employees.services.EmployeeService - validation failed: invalid role for idWED
+2026-02-03 12:34:41,297 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK11 
+2026-02-03 12:34:41,363 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK11 
+2026-02-03 12:39:10,720 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK11
+2026-02-03 12:39:10,790 WARN  com.employees.services.EmployeeService - employee not found with id TEK11 
+2026-02-03 12:40:08,204 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK10 
+2026-02-03 12:40:08,357 WARN  com.employees.services.EmployeeService - role MANAGER doesn't assigned for id TEK10 
+2026-02-03 12:41:38,422 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 12:41:38,476 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK10 
+2026-02-03 12:42:33,097 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK12 
+2026-02-03 12:42:33,153 WARN  com.employees.services.EmployeeService - employee not found with id TEK12 
+2026-02-03 12:43:53,999 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK10
+2026-02-03 12:43:54,057 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK10
+2026-02-03 12:44:05,686 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 12:44:05,746 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK10 
+2026-02-03 12:44:42,102 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK10 
+2026-02-03 12:44:42,161 WARN  com.employees.services.EmployeeService - employee not found with id TEK10 
+2026-02-03 12:45:07,528 INFO  com.employees.services.EmployeeService - revoke role EMPLOYEE request recieved for id TEK10 
+2026-02-03 12:45:07,581 WARN  com.employees.services.EmployeeService - role EMPLOYEE doesn't assigned for id TEK10 
+2026-02-03 13:00:53,467 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 13:00:53,524 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 13:02:01,778 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 13:02:41,041 INFO  com.employees.services.EmployeeService - add employee request recieved for name sunny
+2026-02-03 13:02:41,116 INFO  com.employees.services.EmployeeService - employee added succesfully with name sunny
+2026-02-03 13:02:48,810 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 13:02:48,968 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 13:03:40,182 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK10 
+2026-02-03 13:03:40,184 WARN  com.employees.services.EmployeeService - validation failed: invalid email for TEK10
+2026-02-03 13:05:22,085 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK10 
+2026-02-03 13:05:22,155 WARN  com.employees.services.EmployeeService - employee not found with id TEK10 
+2026-02-03 14:39:30,582 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 14:39:33,135 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 14:39:33,321 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 14:39:44,192 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 14:39:44,266 WARN  com.employees.services.EmployeeService - duplicate role EMPLOYEE is assigned for id TEK10 
+2026-02-03 14:41:16,095 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 14:41:29,596 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 14:41:29,652 WARN  com.employees.services.EmployeeService - duplicate role EMPLOYEE is assigned for id TEK10 
+2026-02-03 14:41:40,808 INFO  com.employees.services.EmployeeService - revoke role EMPLOYEE request recieved for id TEK10 
+2026-02-03 14:41:40,878 WARN  com.employees.services.EmployeeService - role EMPLOYEE doesn't assigned for id TEK10 
+2026-02-03 14:41:49,185 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 14:41:49,241 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 14:42:03,684 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK14 
+2026-02-03 14:42:03,746 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK14 
+2026-02-03 14:42:36,998 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK14 
+2026-02-03 14:42:37,055 INFO  com.employees.services.EmployeeService - revoke role MANAGER succesfully to id TEK14 
+2026-02-03 14:42:47,689 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 14:42:47,873 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 14:43:08,827 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK14 
+2026-02-03 14:43:08,882 INFO  com.employees.services.EmployeeService - revoke role MANAGER succesfully to id TEK14 
+2026-02-03 14:44:54,179 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 14:45:02,002 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK14 
+2026-02-03 14:45:02,060 ERROR com.employees.services.EmployeeService - Database error while revoke the role for id TEK14 
+com.employees.exceptions.DataAccessException: role is not assigned
+	at com.employees.dao.JdbcEmployeeDaoImpl.revokeRole(JdbcEmployeeDaoImpl.java:304)
+	at com.employees.services.EmployeeService.revokeRole(EmployeeService.java:227)
+	at com.employees.controller.EmployeeController.revokeRole(EmployeeController.java:179)
+	at com.employees.controller.Menu.showMenu(Menu.java:82)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:28)
+2026-02-03 15:17:10,406 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 15:17:12,482 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 15:17:12,540 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 15:17:21,946 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK14 
+2026-02-03 15:17:22,045 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK14 
+2026-02-03 15:18:28,176 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK14 
+2026-02-03 15:18:28,233 WARN  com.employees.services.EmployeeService - role MANAGER doesn't assigned for id TEK14 
+2026-02-03 16:06:57,746 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:06:57,806 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:07:59,378 INFO  com.employees.services.EmployeeService - add employee request recieved for name rochisna
+2026-02-03 16:07:59,449 INFO  com.employees.services.EmployeeService - employee added succesfully with name rochisna
+2026-02-03 16:08:04,717 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:08:04,780 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:08:22,324 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK15
+2026-02-03 16:08:22,393 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK15
+2026-02-03 16:08:50,536 INFO  com.employees.services.EmployeeService - add employee request recieved for name rahul
+2026-02-03 16:08:50,738 INFO  com.employees.services.EmployeeService - employee added succesfully with name rahul
+2026-02-03 16:08:53,725 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:08:53,794 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:09:09,768 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK16
+2026-02-03 16:09:09,945 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK16
+2026-02-03 16:44:35,243 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 16:45:45,964 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 16:45:50,861 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:45:50,936 ERROR com.employees.services.EmployeeService - Database error while fetch employees
+com.employees.exceptions.DataAccessException: DB error during fetch employeesorg.postgresql.util.PSQLException: ERROR: syntax error at or near "e"
+  Position: 90
+	at com.employees.dao.JdbcEmployeeDaoImpl.fetchEmployee(JdbcEmployeeDaoImpl.java:176)
+	at com.employees.services.EmployeeService.fetchAll(EmployeeService.java:84)
+	at com.employees.controller.EmployeeController.fetchAll(EmployeeController.java:114)
+	at com.employees.controller.Menu.showMenu(Menu.java:62)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:28)
+2026-02-03 16:51:08,733 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 16:51:12,136 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:51:12,195 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:51:50,661 INFO  com.employees.services.EmployeeService - add employee request recieved for name rohith
+2026-02-03 16:51:50,860 INFO  com.employees.services.EmployeeService - employee added succesfully with name rohith
+2026-02-03 16:51:54,442 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:51:54,505 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:52:10,995 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK17
+2026-02-03 16:52:11,067 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK17
+2026-02-03 16:52:15,330 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 16:52:15,384 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 16:53:23,220 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK17 
+2026-02-03 16:53:23,385 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK17 
+2026-02-03 16:54:14,400 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 16:54:26,047 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK17 
+2026-02-03 16:54:26,239 WARN  com.employees.services.EmployeeService - duplicate role EMPLOYEE is assigned for id TEK17 
+2026-02-03 17:25:38,553 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK17 
+2026-02-03 17:25:38,616 ERROR com.employees.services.EmployeeService - Database error while revoke the role for id TEK17 
+com.employees.exceptions.DataAccessException: employee not found
+	at com.employees.dao.JdbcEmployeeDaoImpl.checkEmpExists(JdbcEmployeeDaoImpl.java:69)
+	at com.employees.dao.JdbcEmployeeDaoImpl.revokeRole(JdbcEmployeeDaoImpl.java:320)
+	at com.employees.services.EmployeeService.revokeRole(EmployeeService.java:227)
+	at com.employees.controller.EmployeeController.revokeRole(EmployeeController.java:177)
+	at com.employees.controller.Menu.showMenu(Menu.java:82)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:28)
+2026-02-03 17:25:58,277 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 17:25:58,336 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 17:26:09,898 INFO  com.employees.services.LoginService - reset password request recieved for id TEK17 
+2026-02-03 17:26:09,953 WARN  com.employees.services.LoginService - employee not found with id TEK17 
+2026-02-03 20:16:43,552 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:16:47,495 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:16:47,498 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:16:56,658 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK12
+2026-02-03 20:17:10,080 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK11
+2026-02-03 20:17:10,084 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK11
+2026-02-03 20:17:13,454 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:17:13,476 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:17:27,685 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK10 
+2026-02-03 20:17:27,687 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK10
+2026-02-03 20:17:38,486 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK11 
+2026-02-03 20:17:38,488 WARN  com.employees.services.EmployeeService - employee not found with id TEK11 
+2026-02-03 20:17:55,864 INFO  com.employees.services.LoginService - reset password request recieved for id TEK4 
+2026-02-03 20:17:55,921 INFO  com.employees.services.LoginService - reset password successfully for id TEK4 
+2026-02-03 20:18:19,999 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK4 
+2026-02-03 20:18:41,254 INFO  com.employees.services.LoginService - login request recieved for id TEK4 
+2026-02-03 20:18:56,458 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK4 
+2026-02-03 20:18:56,464 INFO  com.employees.services.EmployeeService - update employee successfully for id TEK4 
+2026-02-03 20:19:03,774 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK4 
+2026-02-03 20:19:03,799 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK4
+2026-02-03 20:19:29,623 INFO  com.employees.services.LoginService - change password request recieved for id TEK4 
+2026-02-03 20:19:29,627 INFO  com.employees.services.LoginService - change password successfully for id TEK4 
+2026-02-03 20:19:52,121 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:20:03,124 INFO  com.employees.services.EmployeeService - assign role MANAGER request recieved for id TEK4 
+2026-02-03 20:20:03,129 INFO  com.employees.services.EmployeeService - assign role MANAGER succesfully to id TEK4 
+2026-02-03 20:20:05,814 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:20:05,838 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:20:21,131 INFO  com.employees.services.EmployeeService - revoke role ADMIN request recieved for id TEK4 
+2026-02-03 20:20:40,828 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK4 
+2026-02-03 20:20:40,830 INFO  com.employees.services.EmployeeService - revoke role MANAGER succesfully to id TEK4 
+2026-02-03 20:20:52,588 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:20:52,870 WARN  com.employees.services.LoginService - Login failure for id TEK1
+2026-02-03 20:20:56,501 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:21:00,249 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:21:00,338 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:21:11,449 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK14 
+2026-02-03 20:21:11,525 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK14
+2026-02-03 20:21:41,185 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK14 
+2026-02-03 20:21:44,435 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:21:44,520 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:21:54,816 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK14
+2026-02-03 20:21:54,888 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK14
+2026-02-03 20:22:08,752 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 20:22:08,841 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 20:22:39,196 INFO  com.employees.services.EmployeeService - assign role MANAGER request recieved for id TEK9 
+2026-02-03 20:22:39,295 ERROR com.employees.services.EmployeeService - Database error while assign the role for id TEK9 
+2026-02-03 20:23:58,850 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK14 
+2026-02-03 20:24:25,058 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:24:35,903 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK14 
+2026-02-03 20:24:35,983 WARN  com.employees.services.EmployeeService - employee not found with id TEK14 
+2026-02-03 20:24:48,921 INFO  com.employees.services.LoginService - reset password request recieved for id TEK14 
+2026-02-03 20:25:13,703 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK14 
+2026-02-03 20:33:42,136 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 20:33:52,961 INFO  com.employees.services.LoginService - reset password request recieved for id TEK14 
+2026-02-03 20:34:33,108 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK10 
+2026-02-03 21:55:49,142 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 21:56:00,612 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK20 
+2026-02-03 22:17:59,526 INFO  com.employees.services.LoginService - login request recieved for id TEK20 
+2026-02-03 22:17:59,752 WARN  com.employees.services.LoginService - Login failure for id TEK20
+2026-02-03 22:28:46,621 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 22:28:50,093 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 22:28:50,095 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 22:30:29,458 INFO  com.employees.services.EmployeeService - add employee request recieved for name sunny
+2026-02-03 22:30:29,460 INFO  com.employees.services.EmployeeService - employee added succesfully with name sunny
+2026-02-03 22:30:36,592 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 22:30:36,606 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 22:30:58,361 INFO  com.employees.services.EmployeeService - add employee request recieved for name uday
+2026-02-03 22:30:58,362 WARN  com.employees.services.EmployeeService - validation failed: invalid email for name uday
+2026-02-03 22:31:23,397 INFO  com.employees.services.EmployeeService - add employee request recieved for name uday
+2026-02-03 22:31:23,400 INFO  com.employees.services.EmployeeService - employee added succesfully with name uday
+2026-02-03 22:31:36,756 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 22:31:36,774 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 22:31:50,676 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK3
+2026-02-03 22:31:50,678 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK3
+2026-02-03 22:31:53,453 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 22:31:53,469 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 22:32:10,488 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK3 
+2026-02-03 22:32:10,489 WARN  com.employees.services.EmployeeService - employee not found with id TEK3 
+2026-02-03 22:32:27,655 INFO  com.employees.services.LoginService - reset password request recieved for id TEK3 
+2026-02-03 22:32:40,031 INFO  com.employees.services.EmployeeService - assign role MANAGER request recieved for id TEK3 
+2026-02-03 22:33:07,315 INFO  com.employees.services.EmployeeService - assign role MANAGER request recieved for id TEK2 
+2026-02-03 22:33:07,317 INFO  com.employees.services.EmployeeService - assign role MANAGER succesfully to id TEK2 
+2026-02-03 22:33:09,748 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-03 22:33:09,765 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-03 22:33:22,402 INFO  com.employees.services.EmployeeService - revoke role MANAGER request recieved for id TEK2 
+2026-02-03 22:33:22,403 INFO  com.employees.services.EmployeeService - revoke role MANAGER succesfully to id TEK2 
+2026-02-03 22:33:32,658 INFO  com.employees.services.EmployeeService - revoke role ADMIN request recieved for id TEK2 
+2026-02-03 22:50:34,447 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 22:50:37,995 INFO  com.employees.services.EmployeeService - fetch InActive employees request recieved
+2026-02-03 22:50:37,997 INFO  com.employees.services.EmployeeService - fetch inactive employees successfully
+2026-02-03 22:50:55,763 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 22:51:03,615 INFO  com.employees.services.EmployeeService - fetch InActive employees request recieved
+2026-02-03 22:51:03,672 INFO  com.employees.services.EmployeeService - fetch inactive employees successfully
+2026-02-03 23:04:37,365 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-03 23:05:25,466 INFO  com.employees.services.LoginService - login request recieved for id TEK1 

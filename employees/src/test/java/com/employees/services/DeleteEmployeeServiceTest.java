@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,14 +29,15 @@ class DeleteEmployeeServiceTest {
 	
 	@Test
 	public void deleteEmployee_validId_shouldCallDao() {
-		when(employeeDao.deleteEmployee("TEK1")).thenReturn(true);
+		
 		assertDoesNotThrow(() -> delEmployee.delete(employeeDao, "TEK1"));
 		verify(employeeDao).deleteEmployee("TEK1");
 	}
 	
 	@Test
 	public void deleteEmployee_shouldThrowsEmployeeNotFoundException() {
-		when(employeeDao.deleteEmployee("TEK1")).thenReturn(false);
+
+		doThrow(new EmployeeNotFoundException("employee not found")).when(employeeDao).deleteEmployee(anyString());
 		assertThrows(EmployeeNotFoundException.class,()->delEmployee.delete(employeeDao,"TEK1"));
 		
 		verify(employeeDao).deleteEmployee(anyString());

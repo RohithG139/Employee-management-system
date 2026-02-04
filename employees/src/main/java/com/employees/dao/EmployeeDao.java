@@ -13,17 +13,19 @@ public interface EmployeeDao {
 
 	Employee fetchEmployeeById(String id);
 
-	boolean deleteEmployee(String id);
+	void deleteEmployee(String id);
 
-	boolean updateEmployee(Employee emp, Roles role);
+	void updateEmployee(Employee emp, Roles role);
 
-	boolean resetPassword(String id, String password);
+	void resetPassword(String id, String password);
 
-	boolean changePassword(String id, String password);
+	void changePassword(String id, String password);
 	
-	boolean assignRole(String id,Roles role);
+	void assignRole(String id,Roles role);
 	
-	boolean revokeRole(String id,Roles role);
+	void revokeRole(String id,Roles role);
+	
+	List<Employee> fetchInActiveEmployees();
 	
 	LoginResult validateUser(String id, String password);
 }

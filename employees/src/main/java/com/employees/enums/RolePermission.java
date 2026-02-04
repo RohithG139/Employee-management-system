@@ -18,6 +18,8 @@ public class RolePermission {
 				Operations.RESETPASSWORD,
 				Operations.ASSIGNROLE,
 				Operations.REVOKEROLE,
+				Operations.FETCH_INACTIVE_EMPLOYEES,
+				Operations.LOGOUT,
 				Operations.EXIT
 				));
 		
@@ -26,6 +28,7 @@ public class RolePermission {
 				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.UPDATE,
 				Operations.CHANGEPASSWORD,
+				Operations.LOGOUT,
 				Operations.EXIT
 				));
 		
@@ -33,6 +36,7 @@ public class RolePermission {
 				Operations.FETCH_EMPLOYEE_BY_ID,
 				Operations.UPDATE,
 				Operations.CHANGEPASSWORD,
+				Operations.LOGOUT,
 				Operations.EXIT
 				));
 	}

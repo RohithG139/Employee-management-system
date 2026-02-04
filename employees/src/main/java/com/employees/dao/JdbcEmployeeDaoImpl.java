@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,6 +13,8 @@ import java.util.Set;
 
 import com.employees.enums.Roles;
 import com.employees.exceptions.DataAccessException;
+import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
 import com.employees.utils.Util;
@@ -20,8 +23,10 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 	public LoginResult validateUser(String id, String password) {
 
-		String authQuery = "select password from emp_auth where emp_id=?";
-		String roleQuery = "select roles from emp_roles where emp_id=?";
+		String authQuery = "select a.password from emp_auth a join"
+				+ " employees e on a.emp_id=e.emp_id where a.emp_id=?" + " and e.is_active= true";
+		String roleQuery = "select r.roles from emp_roles r join" + " employees e on r.emp_id=e.emp_id where r.emp_id=?"
+				+ " and e.is_active=true";
 
 		try (Connection conn = Util.getConnection();) {
 			try (PreparedStatement ps = conn.prepareStatement(authQuery);
@@ -57,6 +62,19 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 	}
 
+	private void checkActiveEmployee(Connection conn, String id) {
+		String sql = "select 1 from employees where emp_id=? and is_active=true";
+		try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+			stmt.setString(1, id);
+			try (ResultSet rs = stmt.executeQuery()) {
+				if (!rs.next()) {
+					throw new EmployeeNotFoundException("employee not found");
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("DB error while checking employee" + e);
+		}
+	}
 
 	private Employee mapToEmployee(ResultSet rs, PreparedStatement roleStmt) throws SQLException {
 
@@ -141,8 +159,9 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public List<Employee> fetchEmployee() {
-		String fetchQuery = "select * from employees";
-		String fetchRoles = "select roles from emp_roles where emp_id=?";
+		String fetchQuery = "select * from employees where is_active=true";
+		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
+				+ " e.emp_id where r.emp_id=? and  e.is_active=true";
 		List<Employee> empList = new ArrayList<>();
 		try (Connection conn = Util.getConnection();) {
 			try (Statement stmt = conn.createStatement(); PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
@@ -161,8 +180,9 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	}
 
 	public Employee fetchEmployeeById(String id) {
-		String fetchQuery = "select * from employees where emp_id=?";
-		String fetchRoles = "select roles from emp_roles where emp_id=?";
+		String fetchQuery = "select * from employees where emp_id=? and is_active=true";
+		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
+				+ " e.emp_id where r.emp_id=? and e.is_active=true";
 		try (Connection conn = Util.getConnection();) {
 			try (PreparedStatement stmt = conn.prepareStatement(fetchQuery);
 					PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
@@ -170,7 +190,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				ResultSet rs = stmt.executeQuery();
 
 				while (rs.next()) {
-					return mapToEmployee(rs,psmt);
+					return mapToEmployee(rs, psmt);
 				}
 
 			}
@@ -180,26 +200,26 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		return null;
 	}
 
-	public boolean deleteEmployee(String id) {
-		String query = "delete from employees where emp_id=?";
+	public void deleteEmployee(String id) {
+		String query = "update employees set is_active=false, deleted_at=now() where" + " emp_id =? and is_active=true";
 
 		try (Connection conn = Util.getConnection();) {
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				int row = stmt.executeUpdate();
-				if (row != 0) {
-					return true;
+				if (row == 0) {
+					throw new EmployeeNotFoundException("employee not found");
 				}
 			}
 		} catch (SQLException e) {
 			throw new DataAccessException("DB error during delete" + e);
 		}
-		return false;
+
 	}
 
-	public boolean updateEmployee(Employee emp, Roles role) {
-		String adminUpdate = "update employees set emp_name=?,dept=?,email=?,phnNo=? where emp_id=?";
-		String empUpdate = "update employees set phnNo=?,email=? where emp_id=?";
+	public void updateEmployee(Employee emp, Roles role) {
+		String adminUpdate = "update employees set emp_name=?,dept=?,email=?,phnNo=? where emp_id=? and is_active=true";
+		String empUpdate = "update employees set phnNo=?,email=? where emp_id=? and is_active=true";
 
 		try (Connection conn = Util.getConnection();) {
 			String sql = (role == Roles.ADMIN) ? adminUpdate : empUpdate;
@@ -211,8 +231,8 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 					stmt.setString(4, emp.getPhnNo());
 					stmt.setString(5, emp.getId());
 					int row = stmt.executeUpdate();
-					if (row != 0) {
-						return true;
+					if (row == 0) {
+						throw new EmployeeNotFoundException("employee not found");
 					}
 
 				} else {
@@ -220,75 +240,99 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 					stmt.setString(2, emp.getEmail());
 					stmt.setString(3, emp.getId());
 					int row = stmt.executeUpdate();
-					if (row != 0) {
-						return true;
+					if (row == 0) {
+						throw new EmployeeNotFoundException("employee not found");
 					}
 				}
 
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("DB error during update employee" +e);
+			throw new DataAccessException("DB error during update employee" + e);
 		}
-		return false;
+
 	}
 
-	public boolean resetPassword(String id, String password) {
-		String query = "update emp_auth set password=? where emp_id=?";
+	public void resetPassword(String id, String password) {
+		String query = "update emp_auth set password = ? where emp_id = ?";
 		try (Connection conn = Util.getConnection();) {
+			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, password);
 				stmt.setString(2, id);
-				int row = stmt.executeUpdate();
-				if (row != 0) {
-					return true;
-				}
+
+				stmt.executeUpdate();
 
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("DB error during reset password " +e);
+			throw new DataAccessException("DB error during reset password " + e);
 		}
-		return false;
+
 	}
 
-	public boolean changePassword(String id, String password) {
+	public void changePassword(String id, String password) {
 
-		return resetPassword(id, password);
+		resetPassword(id, password);
 	}
 
-	public boolean assignRole(String id, Roles role) {
-		String query = "insert into emp_roles (emp_id,roles) values (?,?)";
+	public void assignRole(String id, Roles role) {
+
+		String query = "insert into emp_roles (emp_id, roles) values (?,?)";
+
 		try (Connection conn = Util.getConnection();) {
-
+			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				stmt.setObject(2, role.name(), java.sql.Types.OTHER);
-				int row = stmt.executeUpdate();
-				if (row != 0) {
-					return true;
-				}
+
+				stmt.executeUpdate();
 
 			}
+		} catch (SQLIntegrityConstraintViolationException e) {
+			throw new ValidationException("duplicate role assigned" + e);
 		} catch (SQLException e) {
-			throw new DataAccessException("DB error while assign role " +e);
+			throw new DataAccessException("DB error while assign role " + e);
 		}
-		return false;
+
 	}
 
-	public boolean revokeRole(String id, Roles role) {
-		String query = "delete  from emp_roles where emp_id=? and roles=?";
-		try (Connection conn = Util.getConnection();) {
+	public void revokeRole(String id, Roles role) {
+		String query = "delete from emp_roles where emp_id = ? and roles = ?";
 
+		try (Connection conn = Util.getConnection();) {
+			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				stmt.setObject(2, role.name(), java.sql.Types.OTHER);
+
 				int row = stmt.executeUpdate();
-				if (row != 0) {
-					return true;
+				if (row == 0) {
+					throw new ValidationException("role not assigned");
 				}
 			}
 		} catch (SQLException e) {
-			throw new DataAccessException("DB error while revoke role " +e);
+			throw new DataAccessException("DB error while revoke role " + e);
 		}
-		return false;
+
+	}
+
+	public List<Employee> fetchInActiveEmployees() {
+		String fetchQuery = "select * from employees where is_active=false";
+		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
+				+ " e.emp_id where r.emp_id=? and  e.is_active=false";
+		List<Employee> empList = new ArrayList<>();
+		try (Connection conn = Util.getConnection();) {
+			try (Statement stmt = conn.createStatement(); PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
+
+				ResultSet rs = stmt.executeQuery(fetchQuery);
+
+				while (rs.next()) {
+					Employee emp = mapToEmployee(rs, psmt);
+					empList.add(emp);
+				}
+			}
+		} catch (SQLException e) {
+			throw new DataAccessException("DB error during fetch employees" + e);
+		}
+		return empList;
 	}
 }

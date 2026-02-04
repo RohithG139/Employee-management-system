@@ -2,6 +2,8 @@ package com.employees.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -70,7 +72,7 @@ class UpdateEmployeeServiceTest {
 	@Test
 	void adminUpdate_validEmployee_shouldUpdateWithAdminRole() {
 		Employee emp = new Employee("TEK2", "Sunny", "IT", "sunny@gmail.com", "8765432123");
-		when(employeeDao.updateEmployee(emp, Roles.ADMIN)).thenReturn(true);
+		
 		Set<Roles> roles = new HashSet<>();
 		roles.add(Roles.ADMIN);
 		LoginResult login = new LoginResult("TEK10", roles);
@@ -83,7 +85,7 @@ class UpdateEmployeeServiceTest {
 	@Test
 	void adminUpdate_validEmployee_shouldThrowsException() {
 		Employee emp = new Employee("TEK2", "Sunny", "IT", "sunny@gmail.com", "8765432123");
-		when(employeeDao.updateEmployee(emp, Roles.ADMIN)).thenReturn(false);
+		doThrow(new EmployeeNotFoundException("employee not found")).when(employeeDao).updateEmployee(emp,Roles.ADMIN);
 		Set<Roles> roles = new HashSet<>();
 		roles.add(Roles.ADMIN);
 		LoginResult login = new LoginResult("TEK10", roles);

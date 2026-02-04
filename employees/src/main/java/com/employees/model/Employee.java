@@ -12,9 +12,10 @@ public class Employee {
 	private String phnNo;
 	private Set<Roles> roles;
 	private String password;
+	private boolean isActive;
+	private Long deletedAt;
 
-
-
+	//adding employee
 	public Employee(String name, String dept, String email, String phnNo, Set<Roles> roles, String password) {
 		this.name = name;
 		this.dept = dept;
@@ -22,6 +23,8 @@ public class Employee {
 		this.phnNo = phnNo;
 		this.roles = roles;
 		this.password = password;
+//		this.isActive=isActive;
+//		this.deletedAt=deletedAt;
 	}
 	
 	public Employee(String id,String name, String dept, String email, String phnNo, Set<Roles> roles) {

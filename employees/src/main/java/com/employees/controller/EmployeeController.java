@@ -19,6 +19,7 @@ public class EmployeeController {
 	EmployeeService employeeService=new EmployeeService();
 
 	public void addEmployee(EmployeeDao dao) {
+		sc.nextLine();
 		System.out.println("Enter name:");
 		String name = sc.nextLine();
 		System.out.println("Enter dept:");
@@ -84,6 +85,7 @@ public class EmployeeController {
 		} else {
 			System.out.println("Enter Id to update:");
 			String id = sc.next().toUpperCase();
+			sc.nextLine();
 			System.out.println("Enter name:");
 			String name = sc.nextLine();
 			System.out.println("Enter dept:");
@@ -163,6 +165,8 @@ public class EmployeeController {
 			System.out.println("error while assign role:" + e.getMessage());
 		} catch (ServiceException e) {
 			System.out.println(e.getMessage());
+		}catch (EmployeeNotFoundException e) {
+			System.out.println(e.getMessage());
 		}
 	}
 	
@@ -176,6 +180,19 @@ public class EmployeeController {
 			System.out.println("role revoked succesfully");
 		} catch (ValidationException e) {
 			System.out.println("error while revoke role:" + e.getMessage());
+		} catch (ServiceException e) {
+			System.out.println(e.getMessage());
+		}catch (EmployeeNotFoundException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void fetchInActiveEmployees(EmployeeDao dao) {
+		try {
+			List<Employee> employees = employeeService.fetchInActiveEmployees(dao);
+			for (Employee employee : employees) {
+				System.out.println(employee.toString());
+			}
 		} catch (ServiceException e) {
 			System.out.println(e.getMessage());
 		}

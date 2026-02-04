@@ -34,16 +34,15 @@ public class LoginService {
 		}
 		String password = "Tek@" + Util.generatePassword();
 		try {
-			boolean result = dao.resetPassword(id, Util.hashPassword(password));
-			if (!result) {
-				logger.warn("employee not found with id {} ", id);
-				throw new EmployeeNotFoundException("employee not found");
-			}
+			dao.resetPassword(id, Util.hashPassword(password));
+			
 			logger.info("reset password successfully for id {} ", id);
 		} catch (DataAccessException e) {
 			logger.error("Database error while reset the password for id {} ", id, e);
 			throw new ServiceException("unable to change password" + e.getMessage());
-		}
+		}catch (EmployeeNotFoundException e) {
+	        throw e;
+	    } 
 
 		return password;
 	}
@@ -59,16 +58,15 @@ public class LoginService {
 			throw new ValidationException("Invalid password");
 		}
 		try {
-			boolean result = dao.changePassword(id, Util.hashPassword(password));
-			if (!result) {
-				logger.warn("employee not found with id {} ", id);
-				throw new EmployeeNotFoundException("employee not found");
-			}
+			 dao.changePassword(id, Util.hashPassword(password));
+			
 			logger.info("change password successfully for id {} ", id);
 		} catch (DataAccessException e) {
 			logger.error("Database error while change the password for id {} ", id, e);
 			throw new ServiceException("unable to change password" + e.getMessage());
-		}
+		}catch (EmployeeNotFoundException e) {
+	        throw e;
+	    } 
 
 	}
 }

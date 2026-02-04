@@ -25,7 +25,7 @@ class UpdateRolesServiceTest {
 	
 	@Test
 	public void updateRoles_validId_doesNotThrowsException() {
-		when(employeeDao.assignRole("TEK1",Roles.ADMIN)).thenReturn(true);
+		
 		assertDoesNotThrow(()->updateRole.assignRole(employeeDao, "TEK1", "ADMIN"));
 	}
 	
@@ -38,7 +38,7 @@ class UpdateRolesServiceTest {
 	
 	@Test
 	public void updateRoles_validRole_doesNotThrowsException() {
-		when(employeeDao.assignRole("TEK1",Roles.EMPLOYEE)).thenReturn(true);
+		
 		assertDoesNotThrow(()->updateRole.assignRole(employeeDao, "TEK1", "EMPLOYEE"));
 	}
 	
