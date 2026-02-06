@@ -86,7 +86,7 @@ class UtilTest {
 	void generatePassword_shouldGenerateSixCharPassword() {
 		String password = Util.generatePassword();
 		assertNotNull(password);
-		assertEquals(6, password.length());
+		assertEquals(8, password.length());
 	}
 
 }

@@ -1,0 +1,116 @@
+2026-02-05 14:42:46,824 INFO  com.employees.services.LoginService - login request recieved for id TEKQ 
+2026-02-05 14:42:47,214 WARN  com.employees.services.LoginService - Login failure for id TEKQ
+2026-02-05 14:43:11,300 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 14:43:19,530 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 14:44:58,281 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:36:13,074 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:36:13,131 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-05 15:36:13,345 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@5dda768f
+2026-02-05 15:36:13,347 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-05 15:46:43,723 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m161ms483µs400ns).
+2026-02-05 15:59:13,928 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:13,943 INFO  com.employees.services.EmployeeService - employee added succesfully with name Rohith
+2026-02-05 15:59:13,964 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:13,964 WARN  com.employees.services.EmployeeService - validation failed: invalid email for name Rohith
+2026-02-05 15:59:13,969 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:13,970 WARN  com.employees.services.EmployeeService - validation failed: invalid role for name Rohith
+2026-02-05 15:59:13,979 INFO  com.employees.services.EmployeeService - delete employee request recieved for id abc
+2026-02-05 15:59:13,981 WARN  com.employees.services.EmployeeService - validation failed: invalid id for id abc
+2026-02-05 15:59:13,993 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK1
+2026-02-05 15:59:14,001 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK1
+2026-02-05 15:59:14,001 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK1
+2026-02-05 15:59:14,017 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK12 
+2026-02-05 15:59:14,019 WARN  com.employees.services.EmployeeService - employee not found with id TEK12 
+2026-02-05 15:59:14,031 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK1 
+2026-02-05 15:59:14,032 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK1
+2026-02-05 15:59:14,038 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK12 
+2026-02-05 15:59:14,038 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK12
+2026-02-05 15:59:14,042 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id abc1 
+2026-02-05 15:59:14,042 WARN  com.employees.services.EmployeeService - Validation error: Invalid id for id abc1 
+2026-02-05 15:59:14,045 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK10 
+2026-02-05 15:59:14,045 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK10
+2026-02-05 15:59:14,049 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK2 
+2026-02-05 15:59:14,049 WARN  com.employees.services.EmployeeService - Authorized error: user TEK1 tried to access employee with id TEK2 
+2026-02-05 15:59:14,059 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:59:14,060 WARN  com.employees.services.LoginService - Login failure for id TEK1
+2026-02-05 15:59:14,064 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:59:14,073 INFO  com.employees.services.LoginService - reset password request recieved for id TEK9 
+2026-02-05 15:59:14,082 INFO  com.employees.services.LoginService - reset password request recieved for id TEK1 
+2026-02-05 15:59:14,083 INFO  com.employees.services.LoginService - reset password successfully for id TEK1 
+2026-02-05 15:59:14,086 INFO  com.employees.services.LoginService - change password request recieved for id TEK1 
+2026-02-05 15:59:14,088 INFO  com.employees.services.LoginService - change password successfully for id TEK1 
+2026-02-05 15:59:14,091 INFO  com.employees.services.LoginService - change password request recieved for id xyz1 
+2026-02-05 15:59:14,091 WARN  com.employees.services.LoginService - validation failed: invalid id for id xyz1
+2026-02-05 15:59:14,093 INFO  com.employees.services.LoginService - change password request recieved for id xyz1 
+2026-02-05 15:59:14,093 WARN  com.employees.services.LoginService - validation failed: invalid id for id xyz1
+2026-02-05 15:59:14,099 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK1 
+2026-02-05 15:59:14,099 WARN  com.employees.services.EmployeeService - validation failed: invalid email for id TEK1
+2026-02-05 15:59:14,104 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK2 
+2026-02-05 15:59:14,108 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK12 
+2026-02-05 15:59:14,108 WARN  com.employees.services.EmployeeService - Authorized error: user TEK1 tried to update employee with id TEK12 
+2026-02-05 15:59:14,110 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK2 
+2026-02-05 15:59:14,114 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK1 
+2026-02-05 15:59:14,114 INFO  com.employees.services.EmployeeService - update employee successfully for id TEK1 
+2026-02-05 15:59:14,119 INFO  com.employees.services.EmployeeService - assign role ADMIN request recieved for id xyz 
+2026-02-05 15:59:14,119 WARN  com.employees.services.EmployeeService - validation failed: invalid id for idxyz
+2026-02-05 15:59:14,122 INFO  com.employees.services.EmployeeService - assign role Man1 request recieved for id TEK1 
+2026-02-05 15:59:14,122 WARN  com.employees.services.EmployeeService - validation failed: invalid role for idMan1
+2026-02-05 15:59:14,125 INFO  com.employees.services.EmployeeService - assign role ADMIN request recieved for id TEK1 
+2026-02-05 15:59:14,126 INFO  com.employees.services.EmployeeService - assign role ADMIN succesfully to id TEK1 
+2026-02-05 15:59:14,128 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK1 
+2026-02-05 15:59:14,129 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE succesfully to id TEK1 
+2026-02-05 15:59:24,667 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:24,681 INFO  com.employees.services.EmployeeService - employee added succesfully with name Rohith
+2026-02-05 15:59:24,702 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:24,703 WARN  com.employees.services.EmployeeService - validation failed: invalid email for name Rohith
+2026-02-05 15:59:24,707 INFO  com.employees.services.EmployeeService - add employee request recieved for name Rohith
+2026-02-05 15:59:24,707 WARN  com.employees.services.EmployeeService - validation failed: invalid role for name Rohith
+2026-02-05 15:59:24,719 INFO  com.employees.services.EmployeeService - delete employee request recieved for id abc
+2026-02-05 15:59:24,720 WARN  com.employees.services.EmployeeService - validation failed: invalid id for id abc
+2026-02-05 15:59:24,729 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK1
+2026-02-05 15:59:24,736 INFO  com.employees.services.EmployeeService - delete employee request recieved for id TEK1
+2026-02-05 15:59:24,737 INFO  com.employees.services.EmployeeService - Employee deleted succesfully for employee id TEK1
+2026-02-05 15:59:24,758 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK12 
+2026-02-05 15:59:24,759 WARN  com.employees.services.EmployeeService - employee not found with id TEK12 
+2026-02-05 15:59:24,763 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK1 
+2026-02-05 15:59:24,763 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK1
+2026-02-05 15:59:24,767 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK12 
+2026-02-05 15:59:24,767 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK12
+2026-02-05 15:59:24,771 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id abc1 
+2026-02-05 15:59:24,771 WARN  com.employees.services.EmployeeService - Validation error: Invalid id for id abc1 
+2026-02-05 15:59:24,775 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK10 
+2026-02-05 15:59:24,776 INFO  com.employees.services.EmployeeService - fetch the employee successfully with id TEK10
+2026-02-05 15:59:24,780 INFO  com.employees.services.EmployeeService - fetch the employee request recieved for id TEK2 
+2026-02-05 15:59:24,780 WARN  com.employees.services.EmployeeService - Authorized error: user TEK1 tried to access employee with id TEK2 
+2026-02-05 15:59:24,803 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:59:24,804 WARN  com.employees.services.LoginService - Login failure for id TEK1
+2026-02-05 15:59:24,811 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 15:59:24,819 INFO  com.employees.services.LoginService - reset password request recieved for id TEK9 
+2026-02-05 15:59:24,826 INFO  com.employees.services.LoginService - reset password request recieved for id TEK1 
+2026-02-05 15:59:24,826 INFO  com.employees.services.LoginService - reset password successfully for id TEK1 
+2026-02-05 15:59:24,829 INFO  com.employees.services.LoginService - change password request recieved for id TEK1 
+2026-02-05 15:59:24,830 INFO  com.employees.services.LoginService - change password successfully for id TEK1 
+2026-02-05 15:59:24,833 INFO  com.employees.services.LoginService - change password request recieved for id xyz1 
+2026-02-05 15:59:24,833 WARN  com.employees.services.LoginService - validation failed: invalid id for id xyz1
+2026-02-05 15:59:24,836 INFO  com.employees.services.LoginService - change password request recieved for id xyz1 
+2026-02-05 15:59:24,836 WARN  com.employees.services.LoginService - validation failed: invalid id for id xyz1
+2026-02-05 15:59:24,842 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK1 
+2026-02-05 15:59:24,842 WARN  com.employees.services.EmployeeService - validation failed: invalid email for id TEK1
+2026-02-05 15:59:24,846 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK2 
+2026-02-05 15:59:24,851 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK12 
+2026-02-05 15:59:24,851 WARN  com.employees.services.EmployeeService - Authorized error: user TEK1 tried to update employee with id TEK12 
+2026-02-05 15:59:24,853 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK2 
+2026-02-05 15:59:24,856 INFO  com.employees.services.EmployeeService - update employee request recieved for id TEK1 
+2026-02-05 15:59:24,856 INFO  com.employees.services.EmployeeService - update employee successfully for id TEK1 
+2026-02-05 15:59:24,862 INFO  com.employees.services.EmployeeService - assign role ADMIN request recieved for id xyz 
+2026-02-05 15:59:24,862 WARN  com.employees.services.EmployeeService - validation failed: invalid id for idxyz
+2026-02-05 15:59:24,865 INFO  com.employees.services.EmployeeService - assign role Man1 request recieved for id TEK1 
+2026-02-05 15:59:24,866 WARN  com.employees.services.EmployeeService - validation failed: invalid role for idMan1
+2026-02-05 15:59:24,868 INFO  com.employees.services.EmployeeService - assign role ADMIN request recieved for id TEK1 
+2026-02-05 15:59:24,868 INFO  com.employees.services.EmployeeService - assign role ADMIN succesfully to id TEK1 
+2026-02-05 15:59:24,871 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE request recieved for id TEK1 
+2026-02-05 15:59:24,871 INFO  com.employees.services.EmployeeService - assign role EMPLOYEE succesfully to id TEK1 
+2026-02-05 17:38:46,069 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-05 17:38:46,113 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-05 17:38:46,320 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@24aed80c
+2026-02-05 17:38:46,321 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.

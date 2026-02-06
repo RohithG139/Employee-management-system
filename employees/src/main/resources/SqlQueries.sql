@@ -30,7 +30,9 @@ create table emp_roles(
   on delete cascade
 );
 
-
+ALTER TABLE employees
+ADD COLUMN is_active BOOLEAN NOT NULL DEFAULT true,
+ADD COLUMN deleted_at TIMESTAMP NULL;
 
 INSERT INTO employees (emp_name, dept, email, phnNo)
 VALUES 

@@ -7,6 +7,7 @@ import com.employees.dao.EmployeeDao;
 import com.employees.dao.FileEmployeeDaoImpl;
 import com.employees.dao.JdbcEmployeeDaoImpl;
 import com.employees.enums.Storage;
+import com.employees.utils.DatabaseConfig;
 
 public class EmployeeApp {
 
@@ -29,15 +30,21 @@ public class EmployeeApp {
 					break;
 				case DB:
 					//Menu.showMenu(new JdbcEmployeeDaoImpl());
+					DatabaseConfig.init(Storage.DB);
+					dao=new JdbcEmployeeDaoImpl();
+					break;
+				case SUPABASE:
+					DatabaseConfig.init(Storage.SUPABASE);
 					dao=new JdbcEmployeeDaoImpl();
 					break;
 				}
 			} catch (IllegalArgumentException e) {
 				System.out.println("invalid storage option");
 			}
-			while(true) {
-				Menu.showMenu(dao);
-			}
+			
+		}
+		while(true) {
+			Menu.showMenu(dao);
 		}
 	}
 }

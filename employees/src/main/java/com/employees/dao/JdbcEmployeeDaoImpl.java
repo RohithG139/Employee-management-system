@@ -17,6 +17,7 @@ import com.employees.exceptions.EmployeeNotFoundException;
 import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
+import com.employees.utils.DatabaseConfig;
 import com.employees.utils.Util;
 
 public class JdbcEmployeeDaoImpl implements EmployeeDao {
@@ -24,11 +25,11 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	public LoginResult validateUser(String id, String password) {
 
 		String authQuery = "select a.password from emp_auth a join"
-				+ " employees e on a.emp_id=e.emp_id where a.emp_id=?" + " and e.is_active= true";
-		String roleQuery = "select r.roles from emp_roles r join" + " employees e on r.emp_id=e.emp_id where r.emp_id=?"
+				+ " employees e on a.emp_id=e.emp_id where a.emp_id=? and e.is_active= true";
+		String roleQuery = "select r.roles from emp_roles r join employees e on r.emp_id=e.emp_id where r.emp_id=?"
 				+ " and e.is_active=true";
 
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			try (PreparedStatement ps = conn.prepareStatement(authQuery);
 					PreparedStatement ps2 = conn.prepareStatement(roleQuery)) {
 				ps.setString(1, id);
@@ -104,7 +105,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		Connection conn = null;
 
 		try {
-			conn = Util.getConnection();
+			conn = DatabaseConfig.getConnection();
 			conn.setAutoCommit(false);
 
 			try (PreparedStatement empStmt = conn.prepareStatement(insertEmployees, new String[] { "emp_id" });
@@ -163,7 +164,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
 				+ " e.emp_id where r.emp_id=? and  e.is_active=true";
 		List<Employee> empList = new ArrayList<>();
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			try (Statement stmt = conn.createStatement(); PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
 
 				ResultSet rs = stmt.executeQuery(fetchQuery);
@@ -183,7 +184,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		String fetchQuery = "select * from employees where emp_id=? and is_active=true";
 		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
 				+ " e.emp_id where r.emp_id=? and e.is_active=true";
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			try (PreparedStatement stmt = conn.prepareStatement(fetchQuery);
 					PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
 				stmt.setString(1, id);
@@ -203,7 +204,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	public void deleteEmployee(String id) {
 		String query = "update employees set is_active=false, deleted_at=now() where" + " emp_id =? and is_active=true";
 
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
 				int row = stmt.executeUpdate();
@@ -221,7 +222,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		String adminUpdate = "update employees set emp_name=?,dept=?,email=?,phnNo=? where emp_id=? and is_active=true";
 		String empUpdate = "update employees set phnNo=?,email=? where emp_id=? and is_active=true";
 
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			String sql = (role == Roles.ADMIN) ? adminUpdate : empUpdate;
 			try (PreparedStatement stmt = conn.prepareStatement(sql)) {
 				if (role == Roles.ADMIN) {
@@ -254,7 +255,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 	public void resetPassword(String id, String password) {
 		String query = "update emp_auth set password = ? where emp_id = ?";
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, password);
@@ -278,7 +279,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 		String query = "insert into emp_roles (emp_id, roles) values (?,?)";
 
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
@@ -298,7 +299,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 	public void revokeRole(String id, Roles role) {
 		String query = "delete from emp_roles where emp_id = ? and roles = ?";
 
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			checkActiveEmployee(conn, id);
 			try (PreparedStatement stmt = conn.prepareStatement(query)) {
 				stmt.setString(1, id);
@@ -320,7 +321,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		String fetchRoles = "select r.roles from emp_roles r join employees e on r.emp_id="
 				+ " e.emp_id where r.emp_id=? and  e.is_active=false";
 		List<Employee> empList = new ArrayList<>();
-		try (Connection conn = Util.getConnection();) {
+		try (Connection conn = DatabaseConfig.getConnection();) {
 			try (Statement stmt = conn.createStatement(); PreparedStatement psmt = conn.prepareStatement(fetchRoles)) {
 
 				ResultSet rs = stmt.executeQuery(fetchQuery);
