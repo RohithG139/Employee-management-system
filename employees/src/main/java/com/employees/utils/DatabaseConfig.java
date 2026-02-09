@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.employees.enums.Storage;
+import com.employees.exceptions.DataAccessException;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -27,7 +28,7 @@ public class DatabaseConfig {
 			InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream(file);
 
 			if (input == null) {
-				throw new RuntimeException("Application.properties not found");
+				throw new DataAccessException("Application.properties not found");
 			}
 			props.load(input);
 

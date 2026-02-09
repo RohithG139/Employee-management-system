@@ -29,8 +29,9 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 		String roleQuery = "select r.roles from emp_roles r join employees e on r.emp_id=e.emp_id where r.emp_id=?"
 				+ " and e.is_active=true";
 
-		try (Connection conn = DatabaseConfig.getConnection();) {
-			try (PreparedStatement ps = conn.prepareStatement(authQuery);
+		
+			try (Connection conn = DatabaseConfig.getConnection();
+					PreparedStatement ps = conn.prepareStatement(authQuery);
 					PreparedStatement ps2 = conn.prepareStatement(roleQuery)) {
 				ps.setString(1, id);
 				ResultSet rs = ps.executeQuery();
@@ -56,7 +57,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				}
 				return new LoginResult(id, roles);
 
-			}
+			
 		} catch (SQLException e) {
 			throw new DataAccessException(" DB error while validating user" + e);
 		}
@@ -145,7 +146,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				if (conn != null)
 					conn.rollback();
 			} catch (SQLException ex) {
-				System.out.println("rollback error:" + ex);
+				e.addSuppressed(ex);   
 			}
 			throw new DataAccessException("failed to add employee" + e);
 
@@ -154,7 +155,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 				if (conn != null)
 					conn.close();
 			} catch (SQLException e) {
-				throw new DataAccessException("error during closing connection" + e);
+				e.addSuppressed(e);
 			}
 		}
 	}

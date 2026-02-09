@@ -22,7 +22,7 @@ import com.employees.utils.Util;
 public class EmployeeService {
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
-	public void insert(EmployeeDao dao, Employee employee, String role) {
+	public String insert(EmployeeDao dao, Employee employee, String role) {
 		logger.info("add employee request recieved for name {}",employee.getName());
 		if (!Util.validateName(employee.getName())) {
 			logger.warn("validation failed: invalid name for name {}",employee.getName());
@@ -48,6 +48,9 @@ public class EmployeeService {
 			roleList.add(Roles.valueOf(role));
 			employee.setRole(roleList);
 		}
+		String password = "Tek@" + Util.generatePassword();
+		String hashedPassword = Util.hashPassword(password);
+		employee.setPassword(hashedPassword);
 		try {
 			dao.addEmployee(employee);
 			logger.info("employee added succesfully with name {}",employee.getName());
@@ -55,7 +58,7 @@ public class EmployeeService {
 			logger.error("Database error during adding employee with name {}",employee.getName(),e);
 			throw new ServiceException("unable to add employee:" + e.getMessage());
 		}
-
+		return password;
 	}
 	
 	public void delete(EmployeeDao dao,String id) {

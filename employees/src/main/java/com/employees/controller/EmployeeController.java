@@ -32,12 +32,10 @@ public class EmployeeController {
 		System.out.println("Enter role:");
 		String role = sc.next().toUpperCase();
 
-		String password = "Tek@" + Util.generatePassword();
-		String hashedPassword = Util.hashPassword(password);
-
-		Employee employee = new Employee(name, dept, email, phnNo, null, hashedPassword);
+		
+		Employee employee = new Employee(name,dept,email,phnNo,null,"");
 		try {
-			employeeService.insert(dao, employee, role);
+			String password=employeeService.insert(dao, employee, role);
 			System.out.println("Employee added succesfully");
 			System.out.println("Your temporary password:" + password);
 		} catch (ValidationException e) {

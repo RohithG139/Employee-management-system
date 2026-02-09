@@ -15,18 +15,19 @@ public class Employee {
 	private boolean isActive;
 	private Long deletedAt;
 
-	//adding employee
-	public Employee(String name, String dept, String email, String phnNo, Set<Roles> roles, String password) {
+	//adding employee constructor
+	public Employee(String name, String dept, String email, String phnNo,Set<Roles> roles,String password) {
 		this.name = name;
 		this.dept = dept;
 		this.email = email;
 		this.phnNo = phnNo;
-		this.roles = roles;
-		this.password = password;
+		this.roles=roles;
+		this.password=password;
 //		this.isActive=isActive;
 //		this.deletedAt=deletedAt;
 	}
 	
+	//printing employee constructor
 	public Employee(String id,String name, String dept, String email, String phnNo, Set<Roles> roles) {
 		this.id=id;
 		this.name = name;
@@ -36,7 +37,7 @@ public class Employee {
 		this.roles = roles;
 		
 	}
-	
+	// update admin constructor
 	public Employee(String id,String name, String dept, String email, String phnNo) {
 		this.id=id;
 		this.name = name;
@@ -44,6 +45,7 @@ public class Employee {
 		this.email = email;
 		this.phnNo = phnNo;
 	}
+	// update own details constructor
 	public Employee(String id,String email,String phnNo) {
 		this.id=id;
 		this.email=email;
