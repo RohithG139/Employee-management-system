@@ -8,10 +8,11 @@ import com.employees.enums.Operations;
 import com.employees.enums.RolePermission;
 import com.employees.enums.Roles;
 import com.employees.model.LoginResult;
+import com.employees.model.Session;
 
 public class Menu {
 
-	public static LoginResult currentUser;
+	
 	public static void showMenu(EmployeeDao dao) {
 
 		Scanner sc = new Scanner(System.in);
@@ -21,8 +22,8 @@ public class Menu {
 		LoginController loginController = new LoginController();
 
 		LoginResult login = loginController.validateUser(dao);
-		Set<Roles> roles = login.getRoles();
-		Menu.currentUser = login;     // currently who are logged in
+		Session session=new Session(login);    // currently who are logged in
+		Set<Roles> roles=session.getRoles();
 		while (true) {
 			for (Operations operation : Operations.values()) {
 				if (rolePermission.hasAccess(roles, operation)) {
@@ -50,7 +51,7 @@ public class Menu {
 				break;
 
 			case UPDATE:
-				controller.updateEmployee(dao);
+				controller.updateEmployee(dao,session);
 				break;
 
 			case DELETE:
@@ -62,7 +63,7 @@ public class Menu {
 				break;
 
 			case FETCH_EMPLOYEE_BY_ID:
-				controller.fetchById(dao);
+				controller.fetchById(dao,session);
 				break;
 
 			case RESETPASSWORD:
@@ -70,7 +71,7 @@ public class Menu {
 				break;
 
 			case CHANGEPASSWORD:
-				loginController.changePassword(dao);
+				loginController.changePassword(dao,session);
 				break;
 
 			case ASSIGNROLE:
@@ -93,6 +94,7 @@ public class Menu {
 				System.out.println("EXIT...");
 				System.exit(0);
 				break;
+				
 				
 			default:
 				System.out.println("Invalid operation");

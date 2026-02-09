@@ -11,6 +11,7 @@ import com.employees.exceptions.ServiceException;
 import com.employees.exceptions.ValidationException;
 import com.employees.model.Employee;
 import com.employees.model.LoginResult;
+import com.employees.model.Session;
 import com.employees.services.EmployeeService;
 import com.employees.utils.Util;
 
@@ -62,8 +63,8 @@ public class EmployeeController {
 		}
 	}
 
-	public void updateEmployee(EmployeeDao dao) {
-		LoginResult user = Menu.currentUser;
+	public void updateEmployee(EmployeeDao dao,Session session) {
+		LoginResult user = session.getUser();
 		if (user.getRoles().size() == 1 && user.getRoles().contains(Roles.EMPLOYEE)) {
 			String id = user.getEmpId();
 			System.out.println("Enter email:");
@@ -121,9 +122,9 @@ public class EmployeeController {
 
 	}
 
-	public void fetchById(EmployeeDao dao) {
+	public void fetchById(EmployeeDao dao,Session session) {
 		
-		LoginResult user = Menu.currentUser;
+		LoginResult user = session.getUser();
 		if (user.getRoles().size() == 1 && user.getRoles().contains(Roles.EMPLOYEE)) {
 			try {
 				Employee employee = employeeService.fetchById(dao,user.getEmpId(), user);

@@ -45,6 +45,11 @@ public class Util {
 		if (name != null && name.trim().isEmpty()) {
 			return false;
 		}
+		Pattern namePattern = Pattern.compile("[A-Za-z]+");
+		Matcher matcher = namePattern.matcher(name);
+		if (!matcher.matches()) {
+			return false;
+		}
 		return true;
 	}
 

@@ -6,6 +6,7 @@ import com.employees.dao.EmployeeDao;
 import com.employees.exceptions.EmployeeNotFoundException;
 import com.employees.exceptions.ValidationException;
 import com.employees.model.LoginResult;
+import com.employees.model.Session;
 import com.employees.services.LoginService;
 
 public class LoginController {
@@ -30,8 +31,8 @@ public class LoginController {
 
 	}
 
-	public void changePassword(EmployeeDao dao) {
-		String id = Menu.currentUser.getEmpId();
+	public void changePassword(EmployeeDao dao,Session session) {
+		String id = session.getId();
 
 		System.out.println("Enter new password:");
 		String password = sc.next();

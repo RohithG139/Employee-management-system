@@ -1,1 +1,25 @@
 2026-02-09 10:37:51,333 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-09 14:45:30,368 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-09 14:45:30,765 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e08711f
+2026-02-09 14:45:30,767 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-09 14:45:33,807 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-09 14:46:21,004 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-09 14:46:21,234 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e08711f
+2026-02-09 14:46:21,235 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-09 14:46:25,099 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-09 14:46:27,389 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-09 14:46:27,408 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-09 14:46:55,721 INFO  com.employees.services.EmployeeService - add employee request recieved for name rohith
+2026-02-09 14:46:55,747 ERROR com.employees.services.EmployeeService - Database error during adding employee with name rohith
+com.employees.exceptions.DataAccessException: failed to add employeeorg.postgresql.util.PSQLException: ERROR: duplicate key value violates unique constraint "employees_email_key"
+  Detail: Key (email)=(rohith@gmail.com) already exists.
+	at com.employees.dao.JdbcEmployeeDaoImpl.addEmployee(JdbcEmployeeDaoImpl.java:150)
+	at com.employees.services.EmployeeService.insert(EmployeeService.java:52)
+	at com.employees.controller.EmployeeController.addEmployee(EmployeeController.java:40)
+	at com.employees.controller.Menu.showMenu(Menu.java:50)
+	at com.employees.main.EmployeeApp.main(EmployeeApp.java:47)
+2026-02-09 14:51:24,843 INFO  com.employees.services.EmployeeService - add employee request recieved for name shanmukh
+2026-02-09 14:51:24,866 INFO  com.employees.services.EmployeeService - employee added succesfully with name shanmukh
+2026-02-09 14:52:53,301 INFO  com.employees.services.LoginService - login request recieved for id TEK19 
+2026-02-09 14:53:08,171 INFO  com.employees.services.LoginService - change password request recieved for id TEK19 
+2026-02-09 14:53:08,190 INFO  com.employees.services.LoginService - change password successfully for id TEK19 
