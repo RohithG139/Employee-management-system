@@ -1,0 +1,10 @@
+2026-02-10 10:17:30,680 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-10 10:17:30,974 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e08711f
+2026-02-10 10:17:30,975 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-10 10:17:33,892 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-10 16:05:42,967 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-10 16:05:43,311 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e08711f
+2026-02-10 16:05:43,326 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-10 16:05:46,426 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-10 16:05:50,932 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
+2026-02-10 16:05:50,967 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
