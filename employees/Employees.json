@@ -1,1 +1,41 @@
-[{"password":"8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918","deletedAt":null,"role":["ADMIN"],"name":"admin","id":"TEK1","dept":"Administration","phnNo":"9876543210","isActive":true,"email":"Admin@gmail.com"},{"password":"fe33efb576ae5b8964bf67d10aaca1ddd1263f3fce0b8f551ff41ae41694157b","deletedAt":null,"role":["EMPLOYEE"],"name":"sunny","id":"TEK2","dept":"dev","phnNo":"8765456123","isActive":true,"email":"sunny@gmail.com"},{"password":"0013fc211479f5c61dd11b6a8c5e7733eea1c9c6a543ccf8e7d1466dc07a1deb","deletedAt":1770138110677,"role":["MANAGER"],"name":"uday","id":"TEK3","dept":"dev","phnNo":"8765423488","isActive":false,"email":"uday@gmail.com"}]
+[
+	{
+		"password": "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
+		"deletedAt": null,
+		"role": [
+			"ADMIN"
+		],
+		"name": "admin",
+		"id": "TEK1",
+		"dept": "Administration",
+		"phnNo": "9876543210",
+		"isActive": true,
+		"email": "Admin@gmail.com"
+	},
+	{
+		"password": "fe33efb576ae5b8964bf67d10aaca1ddd1263f3fce0b8f551ff41ae41694157b",
+		"deletedAt": null,
+		"role": [
+			"EMPLOYEE"
+		],
+		"name": "sunny",
+		"id": "TEK2",
+		"dept": "dev",
+		"phnNo": "8765456123",
+		"isActive": true,
+		"email": "sunny@gmail.com"
+	},
+	{
+		"password": "0013fc211479f5c61dd11b6a8c5e7733eea1c9c6a543ccf8e7d1466dc07a1deb",
+		"deletedAt": 1770138110677,
+		"role": [
+			"MANAGER"
+		],
+		"name": "uday",
+		"id": "TEK3",
+		"dept": "dev",
+		"phnNo": "8765423488",
+		"isActive": false,
+		"email": "uday@gmail.com"
+	}
+]
