@@ -16,12 +16,17 @@ public class LoginService {
 
 	public LoginResult login(EmployeeDao dao, String id, String password) {
 		logger.info("login request recieved for id {} ", id);
-		LoginResult login = dao.validateUser(id, Util.hashPassword(password));
+		LoginResult login=null;
+		try {
+		login = dao.validateUser(id, Util.hashPassword(password));
 		if (login == null) {
 			logger.warn("Login failure for id {}", id);
 			throw new ValidationException("Incorrect username or password");
 		}
-
+		}catch (DataAccessException e) {
+			logger.error("Database error while login for id {} ", id, e);
+			throw new ServiceException("unable to login:" + e.getMessage());
+		}
 		return login;
 
 	}

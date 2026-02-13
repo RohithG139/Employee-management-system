@@ -12,28 +12,27 @@ import com.zaxxer.hikari.HikariDataSource;
 
 public class DatabaseConfig {
 	private static HikariDataSource dataSource;
-	
+
 	public static void init(Storage storage) {
-	    String file="";
-		switch(storage) {
+		String file = "";
+		switch (storage) {
 		case DB:
-			file="Application.properties";
+			file = "postgres.properties";
 			break;
 		case SUPABASE:
-			file="postgres.properties";
+			file = "supabase.properties";
 			break;
 		}
-		try {
-			Properties props = new Properties();
-			InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream(file);
+		try (InputStream input = DatabaseConfig.class.getClassLoader().getResourceAsStream(file);) {
 
 			if (input == null) {
-				throw new DataAccessException("Application.properties not found");
+				throw new DataAccessException("properties file not found");
 			}
+			Properties props = new Properties();
 			props.load(input);
 
 			HikariConfig config = new HikariConfig();
-            
+
 			config.setJdbcUrl(props.getProperty("db.url"));
 			config.setUsername(props.getProperty("db.username"));
 			config.setPassword(props.getProperty("db.password"));
@@ -46,12 +45,20 @@ public class DatabaseConfig {
 
 			dataSource = new HikariDataSource(config);
 		} catch (Exception e) {
-			throw new RuntimeException("Error initializing HikariCP pool: " + e.getMessage());
+			throw new DataAccessException("Error initializing HikariCP pool: " + e.getMessage());
 		}
 	}
 
 	public static Connection getConnection() throws SQLException {
+		if (dataSource == null) {
+			throw new IllegalStateException("Database not initialized Call init() first");
+		}
 		return dataSource.getConnection();
 	}
 
+	public static void shutdown() {
+		if (dataSource != null && !dataSource.isClosed()) {
+			dataSource.close();
+		}
+	}
 }

@@ -203,7 +203,7 @@ public class EmployeeService {
 			logger.info("assign role {} succesfully to id {} ",role,id);
 		} catch (DataAccessException e) {
 			logger.error("Database error while assign the role for id {} ",id,e.getMessage());
-			throw new ServiceException("unable to assign role:"+e);
+			throw new ServiceException("unable to assign role:"+e.getMessage());
 		}catch (EmployeeNotFoundException | ValidationException e) {
 	        throw e;
 		}
