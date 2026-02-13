@@ -51,7 +51,9 @@ public class DatabaseConfig {
 	}
 
 	public static Connection getConnection() throws SQLException {
+		System.out.print("connection");
 		return dataSource.getConnection();
+		
 	}
 
 }
