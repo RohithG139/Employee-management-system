@@ -56,8 +56,9 @@ public class DatabaseConfig {
 		return dataSource.getConnection();
 	}
 
-
-
-	
-	
+	public static void shutdown() {
+		if (dataSource != null && !dataSource.isClosed()) {
+			dataSource.close();
+		}
+	}
 }
