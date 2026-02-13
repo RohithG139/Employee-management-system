@@ -8,3 +8,9 @@
 2026-02-10 16:05:46,426 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
 2026-02-10 16:05:50,932 INFO  com.employees.services.EmployeeService - fetch all employees request recieved
 2026-02-10 16:05:50,967 INFO  com.employees.services.EmployeeService - fetch all the employees successfully
+2026-02-10 16:40:29,840 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-10 17:44:04,102 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-02-10 17:44:04,329 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4e08711f
+2026-02-10 17:44:04,331 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-02-10 17:44:07,253 INFO  com.employees.services.LoginService - login request recieved for id TEK1 
+2026-02-10 19:40:21,896 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h31m47s78ms164µs300ns).

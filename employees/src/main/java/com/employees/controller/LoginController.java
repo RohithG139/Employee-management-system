@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.employees.dao.EmployeeDao;
 import com.employees.exceptions.EmployeeNotFoundException;
+import com.employees.exceptions.ServiceException;
 import com.employees.exceptions.ValidationException;
 import com.employees.model.LoginResult;
 import com.employees.model.Session;
@@ -26,6 +27,8 @@ public class LoginController {
 				return loggedInUser;
 			} catch (ValidationException e) {
 				System.out.println("error during login:" + e.getMessage());
+			}catch(ServiceException e) {
+				System.out.println(e.getMessage());
 			}
 		}
 

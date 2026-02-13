@@ -278,7 +278,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 	public void assignRole(String id, Roles role) {
 
-		String query = "insert into emp_roles (emp_id, roles) values (?,?)";
+		String query = "insert into emp_roles (emp_id, roles) values (?,?) ";
 
 		try (Connection conn = DatabaseConfig.getConnection();) {
 			checkActiveEmployee(conn, id);
@@ -290,7 +290,7 @@ public class JdbcEmployeeDaoImpl implements EmployeeDao {
 
 			}
 		} catch (SQLIntegrityConstraintViolationException e) {
-			throw new ValidationException("duplicate role assigned" + e);
+			throw new ValidationException("duplicate role assigned");
 		} catch (SQLException e) {
 			throw new DataAccessException("DB error while assign role " + e);
 		}

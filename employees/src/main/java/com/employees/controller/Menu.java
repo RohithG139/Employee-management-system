@@ -9,6 +9,7 @@ import com.employees.enums.RolePermission;
 import com.employees.enums.Roles;
 import com.employees.model.LoginResult;
 import com.employees.model.Session;
+import com.employees.utils.DatabaseConfig;
 
 public class Menu {
 
@@ -92,8 +93,9 @@ public class Menu {
 				
 			case EXIT:
 				System.out.println("EXIT...");
+				DatabaseConfig.shutdown();
+				sc.close();
 				System.exit(0);
-				break;
 				
 				
 			default:

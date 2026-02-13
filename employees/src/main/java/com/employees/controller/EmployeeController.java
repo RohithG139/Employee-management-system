@@ -161,7 +161,7 @@ public class EmployeeController {
 			employeeService.assignRole(dao, id, role);
 			System.out.println("role assigned succesfully");
 		} catch (ValidationException e) {
-			System.out.println("error while assign role:" + e.getMessage());
+			System.out.println(e.getMessage());
 		} catch (ServiceException e) {
 			System.out.println(e.getMessage());
 		}catch (EmployeeNotFoundException e) {
